@@ -17,6 +17,7 @@ class EcommerceApp extends StatelessWidget {
       title: AppConstants.appName,
       theme: AppTheme.lightTheme(),
       home: const HomePage(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
