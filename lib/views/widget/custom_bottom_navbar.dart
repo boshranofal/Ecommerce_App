@@ -1,3 +1,4 @@
+import 'package:ecommerce_app/utils/app_colors.dart';
 import 'package:ecommerce_app/views/pages/cart_page.dart';
 import 'package:ecommerce_app/views/pages/favorite_page.dart';
 import 'package:ecommerce_app/views/pages/home_page.dart';
@@ -20,30 +21,34 @@ class _CustomBottomNavbarState extends State<CustomBottomNavbar> {
         PersistentTabConfig(
           screen: const HomePage(),
           item: ItemConfig(
-            icon: const Icon(Icons.home),
-            title: "Home",
-          ),
+              icon: const Icon(Icons.home),
+              title: "Home",
+              activeForegroundColor: AppColors.primary,
+              inactiveBackgroundColor: AppColors.grey5),
         ),
         PersistentTabConfig(
           screen: const CartPage(),
           item: ItemConfig(
-            icon: const Icon(Icons.shopping_cart),
-            title: "Cart",
-          ),
+              icon: const Icon(Icons.shopping_cart),
+              title: "Cart",
+              activeForegroundColor: AppColors.primary,
+              inactiveBackgroundColor: AppColors.grey5),
         ),
         PersistentTabConfig(
           screen: const FavoritePage(),
           item: ItemConfig(
-            icon: const Icon(Icons.favorite),
-            title: "Favorite",
-          ),
+              icon: const Icon(Icons.favorite),
+              title: "Favorite",
+              activeForegroundColor: AppColors.primary,
+              inactiveBackgroundColor: AppColors.grey5),
         ),
         PersistentTabConfig(
           screen: const ProfilePage(),
           item: ItemConfig(
-            icon: const Icon(Icons.person),
-            title: "Profile",
-          ),
+              icon: const Icon(Icons.person),
+              title: "Profile",
+              activeForegroundColor: AppColors.primary,
+              inactiveBackgroundColor: AppColors.grey5),
         ),
       ],
       navBarBuilder: (navBarConfig) => Style1BottomNavBar(

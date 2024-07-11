@@ -1,6 +1,7 @@
 import 'package:ecommerce_app/utils/app_constants.dart';
 import 'package:ecommerce_app/utils/app_theme.dart';
-import 'package:ecommerce_app/views/pages/home_page.dart';
+//import 'package:ecommerce_app/views/pages/home_page.dart';
+import 'package:ecommerce_app/views/widget/custom_bottom_navbar.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -16,7 +17,7 @@ class EcommerceApp extends StatelessWidget {
     return MaterialApp(
       title: AppConstants.appName,
       theme: AppTheme.lightTheme(),
-      home: const HomePage(),
+      home: const CustomBottomNavbar(),
       debugShowCheckedModeBanner: false,
     );
   }
