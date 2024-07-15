@@ -1,3 +1,5 @@
+import 'package:ecommerce_app/views/pages/catugory_tab_inner.dart';
+import 'package:ecommerce_app/views/pages/home_tab_inner.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
@@ -5,8 +7,23 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(),
-    );
+    return const DefaultTabController(
+        length: 2,
+        child: Column(
+          children: [
+            TabBar(
+              dividerHeight: 0,
+              tabs: [
+                Tab(text: 'Home'),
+                Tab(text: 'Catugory'),
+              ],
+            ),
+            Expanded(
+                child: TabBarView(children: [
+              HomeTabInner(),
+              CatugoryTabInner(),
+            ]))
+          ],
+        ));
   }
 }
