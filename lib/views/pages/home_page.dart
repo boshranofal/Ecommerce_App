@@ -18,6 +18,9 @@ class HomePage extends StatelessWidget {
                 Tab(text: 'Catugory'),
               ],
             ),
+            SizedBox(
+              height: 8,
+            ),
             Expanded(
                 child: TabBarView(children: [
               HomeTabInner(),

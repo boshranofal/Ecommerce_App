@@ -18,62 +18,63 @@ class _CustomBottomNavbarState extends State<CustomBottomNavbar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          leading: const Padding(
-            padding: EdgeInsets.all(8.0),
-            child: CircleAvatar(
-              backgroundImage:
-                  AssetImage('assets/images/profile_image.jpg', bundle: null),
-            ),
+      appBar: AppBar(
+        leading: const Padding(
+          padding: EdgeInsets.all(8.0),
+          child: CircleAvatar(
+            backgroundImage:
+                AssetImage('assets/images/profile_image.jpg', bundle: null),
           ),
-          title: buildtitle(),
-          actions: [
-            IconButton(onPressed: () {}, icon: Icon(Icons.search)),
-            IconButton(onPressed: () {}, icon: Icon(Icons.notifications))
-          ],
         ),
-        body: PersistentTabView(
-          onTabChanged: (value) => setState(() {
-            _currentIndex = value;
-          }),
-          tabs: [
-            PersistentTabConfig(
-              screen: const HomePage(),
-              item: ItemConfig(
-                  icon: const Icon(Icons.home),
-                  title: "Home",
-                  activeForegroundColor: AppColors.primary,
-                  inactiveBackgroundColor: AppColors.grey5),
-            ),
-            PersistentTabConfig(
-              screen: const CartPage(),
-              item: ItemConfig(
-                  icon: const Icon(Icons.shopping_cart),
-                  title: "Cart",
-                  activeForegroundColor: AppColors.primary,
-                  inactiveBackgroundColor: AppColors.grey5),
-            ),
-            PersistentTabConfig(
-              screen: const FavoritePage(),
-              item: ItemConfig(
-                  icon: const Icon(Icons.favorite),
-                  title: "Favorite",
-                  activeForegroundColor: AppColors.primary,
-                  inactiveBackgroundColor: AppColors.grey5),
-            ),
-            PersistentTabConfig(
-              screen: const ProfilePage(),
-              item: ItemConfig(
-                  icon: const Icon(Icons.person),
-                  title: "Profile",
-                  activeForegroundColor: AppColors.primary,
-                  inactiveBackgroundColor: AppColors.grey5),
-            ),
-          ],
-          navBarBuilder: (navBarConfig) => Style1BottomNavBar(
-            navBarConfig: navBarConfig,
+        title: buildtitle(),
+        actions: [
+          IconButton(onPressed: () {}, icon: const Icon(Icons.search)),
+          IconButton(onPressed: () {}, icon: const Icon(Icons.notifications))
+        ],
+      ),
+      body: PersistentTabView(
+        onTabChanged: (value) => setState(() {
+          _currentIndex = value;
+        }),
+        tabs: [
+          PersistentTabConfig(
+            screen: const HomePage(),
+            item: ItemConfig(
+                icon: const Icon(Icons.home),
+                title: "Home",
+                activeForegroundColor: AppColors.primary,
+                inactiveBackgroundColor: AppColors.grey5),
           ),
-        ));
+          PersistentTabConfig(
+            screen: const CartPage(),
+            item: ItemConfig(
+                icon: const Icon(Icons.shopping_cart),
+                title: "Cart",
+                activeForegroundColor: AppColors.primary,
+                inactiveBackgroundColor: AppColors.grey5),
+          ),
+          PersistentTabConfig(
+            screen: const FavoritePage(),
+            item: ItemConfig(
+                icon: const Icon(Icons.favorite),
+                title: "Favorite",
+                activeForegroundColor: AppColors.primary,
+                inactiveBackgroundColor: AppColors.grey5),
+          ),
+          PersistentTabConfig(
+            screen: const ProfilePage(),
+            item: ItemConfig(
+                icon: const Icon(Icons.person),
+                title: "Profile",
+                activeForegroundColor: AppColors.primary,
+                inactiveBackgroundColor: AppColors.grey5),
+          ),
+        ],
+        navBarBuilder: (navBarConfig) => Style1BottomNavBar(
+          navBarConfig: navBarConfig,
+        ),
+      ),
+    );
   }
 
   Widget buildtitle() {
@@ -99,7 +100,9 @@ class _CustomBottomNavbarState extends State<CustomBottomNavbar> {
       case 1:
         return const Text("Cart");
       case 2:
-        return const Text("Favorite");
+        return const Text(
+          "My Favorite",
+        );
       case 3:
         return const Text("Profile");
       default:
