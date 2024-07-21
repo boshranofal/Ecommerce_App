@@ -6,17 +6,16 @@ import 'package:ecommerce_app/models/product_models.dart';
 
 class ProductFavorite extends StatefulWidget {
   final ProductModels product;
-  const ProductFavorite({
-    Key? key,
-    required this.product,
-  }) : super(key: key);
+
+  ProductFavorite({required this.product});
 
   @override
-  State<ProductFavorite> createState() => _ProductFavoriteState();
+  _ProductFavoriteState createState() => _ProductFavoriteState();
 }
 
 class _ProductFavoriteState extends State<ProductFavorite> {
   late List<ProductModels> filteredProducts;
+
   @override
   void initState() {
     super.initState();
@@ -27,31 +26,32 @@ class _ProductFavoriteState extends State<ProductFavorite> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Stack(children: [
-          Container(
-            //color: AppColors.grey,
-            height: 108,
-            width: 190,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(16),
-              color: const Color.fromARGB(255, 235, 224, 224),
+        Stack(
+          children: [
+            Container(
+              height: 108,
+              width: 190,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(16),
+                color: const Color.fromARGB(255, 235, 224, 224),
+              ),
             ),
-          ),
-          Padding(
+            Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8),
               child: Image.asset(
                 widget.product.image,
                 height: 97,
-                //width: ,
                 fit: BoxFit.cover,
-              )),
-          Positioned(
+              ),
+            ),
+            Positioned(
               top: 8.0,
               right: 8.0,
               child: DecoratedBox(
                 decoration: const BoxDecoration(
-                    color: Color.fromARGB(255, 235, 217, 217),
-                    shape: BoxShape.circle),
+                  color: Color.fromARGB(255, 235, 217, 217),
+                  shape: BoxShape.circle,
+                ),
                 child: InkWell(
                   child: const Padding(
                     padding: EdgeInsets.all(4.0),
@@ -62,17 +62,19 @@ class _ProductFavoriteState extends State<ProductFavorite> {
                     ),
                   ),
                   onTap: () {
-                    // setState(() {
-                    //   if (dummyFavorite.contains(widget.product)) {
-                    //     dummyFavorite.remove(widget.product);
-                    //   } else {
-                    //     dummyFavorite.add(widget.product);
-                    //   }
-                    // });
+                    setState(() {
+                      if (dummyFavorite.contains(widget.product)) {
+                        dummyFavorite.remove(widget.product);
+                      } else {
+                        dummyFavorite.add(widget.product);
+                      }
+                    });
                   },
                 ),
-              )),
-        ]),
+              ),
+            ),
+          ],
+        ),
         Text(
           widget.product.name,
           style: Theme.of(context).textTheme.titleMedium!.copyWith(

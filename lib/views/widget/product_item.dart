@@ -19,40 +19,39 @@ class ProductItem extends StatefulWidget {
 
 class _ProductItemState extends State<ProductItem> {
   @override
-  @override
   void initState() {
     super.initState();
-    //filteredProducts = dummyProducts;
   }
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Stack(children: [
-          Container(
-            height: 113,
-            width: 200,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(16),
-              color: const Color.fromARGB(255, 235, 224, 224),
+        Stack(
+          children: [
+            Container(
+              height: 113,
+              width: 200,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(16),
+                color: const Color.fromARGB(255, 235, 224, 224),
+              ),
             ),
-          ),
-          Padding(
+            Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8),
               child: Image.asset(
                 widget.product.image,
                 height: 97,
-                //width: ,
                 fit: BoxFit.cover,
-              )),
-          Positioned(
+              ),
+            ),
+            Positioned(
               top: 8.0,
               right: 8.0,
               child: DecoratedBox(
                 decoration: const BoxDecoration(
-                    //color: Color.fromARGB(255, 235, 217, 217),
-                    shape: BoxShape.circle),
+                  shape: BoxShape.circle,
+                ),
                 child: InkWell(
                   child: Padding(
                     padding: const EdgeInsets.all(4.0),
@@ -65,16 +64,19 @@ class _ProductItemState extends State<ProductItem> {
                     ),
                   ),
                   onTap: () {
-                    if (dummyFavorite.contains(widget.product)) {
-                      dummyFavorite.remove(widget.product);
-                    } else {
-                      dummyFavorite.add(widget.product);
-                    }
-                    setState(() {});
+                    setState(() {
+                      if (dummyFavorite.contains(widget.product)) {
+                        dummyFavorite.remove(widget.product);
+                      } else {
+                        dummyFavorite.add(widget.product);
+                      }
+                    });
                   },
                 ),
-              )),
-        ]),
+              ),
+            ),
+          ],
+        ),
         Text(
           widget.product.name,
           style: Theme.of(context).textTheme.titleMedium!.copyWith(

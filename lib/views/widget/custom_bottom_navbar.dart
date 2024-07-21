@@ -33,6 +33,7 @@ class _CustomBottomNavbarState extends State<CustomBottomNavbar> {
         ],
       ),
       body: PersistentTabView(
+        stateManagement: false,
         onTabChanged: (value) => setState(() {
           _currentIndex = value;
         }),

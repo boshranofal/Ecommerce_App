@@ -8,6 +8,7 @@ class ProductModels {
   final double price;
   final String id;
   final CatugoryModels category;
+  int count = 1;
 
   ProductModels(
       {required this.name,

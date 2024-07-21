@@ -1,4 +1,4 @@
-import 'package:ecommerce_app/models/catugory_models.dart';
+//import 'package:ecommerce_app/models/catugory_models.dart';
 import 'package:ecommerce_app/models/product_models.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -66,18 +66,28 @@ class _CartPageState extends State<CartPage> {
                             children: [
                               IconButton(
                                 icon: const Icon(Icons.add),
-                                onPressed: () {},
+                                onPressed: () {
+                                  setState(() {
+                                    dummyProducts[index].count++;
+                                  });
+                                },
                               ),
-                              const Text(
-                                '1',
-                                style: TextStyle(
+                              Text(
+                                '${dummyProducts[index].count}',
+                                style: const TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
                               IconButton(
                                 icon: const Icon(Icons.remove),
-                                onPressed: () {},
+                                onPressed: () {
+                                  setState(() {
+                                    if (dummyProducts[index].count > 0) {
+                                      dummyProducts[index].count--;
+                                    }
+                                  });
+                                },
                               ),
                             ],
                           ),
@@ -109,70 +119,73 @@ class _CartPageState extends State<CartPage> {
         // ),
         Padding(
           padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              const SizedBox(height: 20.0),
-              const Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Text('Subtotal', style: TextStyle(fontSize: 16.0)),
-                  Text('\$93.00', style: TextStyle(fontSize: 16.0)),
-                ],
-              ),
-              const SizedBox(height: 10.0),
-              const Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Text('Shipping', style: TextStyle(fontSize: 16.0)),
-                  Text('\$6.00', style: TextStyle(fontSize: 16.0)),
-                ],
-              ),
-              const Divider(
-                thickness: 1.0,
-                color: Color.fromARGB(255, 153, 143, 143),
-              ),
-              const Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Text(
-                    'Total amount',
-                    style: TextStyle(
-                      fontSize: 16.0,
-                      fontWeight: FontWeight.bold,
+          child: SizedBox(
+            height: 240,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                const SizedBox(height: 20.0),
+                const Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Text('Subtotal', style: TextStyle(fontSize: 16.0)),
+                    Text('\$93.00', style: TextStyle(fontSize: 16.0)),
+                  ],
+                ),
+                const SizedBox(height: 10.0),
+                const Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Text('Shipping', style: TextStyle(fontSize: 16.0)),
+                    Text('\$6.00', style: TextStyle(fontSize: 16.0)),
+                  ],
+                ),
+                const Divider(
+                  thickness: 1.0,
+                  color: Color.fromARGB(255, 153, 143, 143),
+                ),
+                const Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Text(
+                      'Total amount',
+                      style: TextStyle(
+                        fontSize: 16.0,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  ),
-                  Text(
-                    '\$99.00',
-                    style: TextStyle(
-                      fontSize: 16.0,
-                      fontWeight: FontWeight.bold,
+                    Text(
+                      '\$99.00',
+                      style: TextStyle(
+                        fontSize: 16.0,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 20.0),
-              Center(
-                child: ElevatedButton(
-                  onPressed: () {
-                    // Handle checkout action
-                  },
-                  style: ElevatedButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(
-                      vertical: 16.0,
-                      horizontal: 50.0,
+                  ],
+                ),
+                const SizedBox(height: 20.0),
+                Center(
+                  child: ElevatedButton(
+                    onPressed: () {
+                      // Handle checkout action
+                    },
+                    style: ElevatedButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(
+                        vertical: 16.0,
+                        horizontal: 50.0,
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30.0),
+                      ),
                     ),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30.0),
+                    child: const Text(
+                      'Checkout',
+                      style: TextStyle(fontSize: 16.0),
                     ),
-                  ),
-                  child: const Text(
-                    'Checkout',
-                    style: TextStyle(fontSize: 16.0),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ],
