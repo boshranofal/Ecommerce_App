@@ -1,6 +1,6 @@
 import 'package:ecommerce_app/models/product_models.dart';
 import 'package:ecommerce_app/views/widget/product_favorite.dart';
-import 'package:ecommerce_app/views/widget/product_item.dart';
+//import 'package:ecommerce_app/views/widget/product_item.dart';
 import 'package:flutter/material.dart';
 
 class FavoritePage extends StatelessWidget {

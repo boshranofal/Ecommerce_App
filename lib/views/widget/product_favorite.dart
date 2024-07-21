@@ -16,23 +16,30 @@ class ProductFavorite extends StatefulWidget {
 }
 
 class _ProductFavoriteState extends State<ProductFavorite> {
+  late List<ProductModels> filteredProducts;
+  @override
+  void initState() {
+    super.initState();
+    filteredProducts = dummyProducts;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         Stack(children: [
           Container(
-            color: AppColors.grey,
+            //color: AppColors.grey,
             height: 108,
             width: 190,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(16),
-              color: Color.fromARGB(255, 235, 224, 224),
+              color: const Color.fromARGB(255, 235, 224, 224),
             ),
           ),
           Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8),
-              child: Image.network(
+              child: Image.asset(
                 widget.product.image,
                 height: 97,
                 //width: ,
@@ -55,12 +62,13 @@ class _ProductFavoriteState extends State<ProductFavorite> {
                     ),
                   ),
                   onTap: () {
-                    if (dummyFavorite.contains(widget.product)) {
-                      dummyFavorite.remove(widget.product);
-                    } else {
-                      dummyFavorite.add(widget.product);
-                    }
-                    setState(() {});
+                    // setState(() {
+                    //   if (dummyFavorite.contains(widget.product)) {
+                    //     dummyFavorite.remove(widget.product);
+                    //   } else {
+                    //     dummyFavorite.add(widget.product);
+                    //   }
+                    // });
                   },
                 ),
               )),

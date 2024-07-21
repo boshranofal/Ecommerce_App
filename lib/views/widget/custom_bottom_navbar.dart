@@ -104,7 +104,7 @@ class _CustomBottomNavbarState extends State<CustomBottomNavbar> {
           "My Favorite",
         );
       case 3:
-        return const Text("Profile");
+        return const Text("My Profile");
       default:
         return const Text("Home");
     }

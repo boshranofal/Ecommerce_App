@@ -1,10 +1,10 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:cached_network_image/cached_network_image.dart';
+//import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ecommerce_app/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 
 import 'package:ecommerce_app/models/product_models.dart';
-import 'package:flutter/widgets.dart';
+//import 'package:flutter/widgets.dart';
 
 class ProductItem extends StatefulWidget {
   const ProductItem({
@@ -19,6 +19,13 @@ class ProductItem extends StatefulWidget {
 
 class _ProductItemState extends State<ProductItem> {
   @override
+  @override
+  void initState() {
+    super.initState();
+    //filteredProducts = dummyProducts;
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Column(
       children: [
@@ -28,12 +35,12 @@ class _ProductItemState extends State<ProductItem> {
             width: 200,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(16),
-              color: Color.fromARGB(255, 235, 224, 224),
+              color: const Color.fromARGB(255, 235, 224, 224),
             ),
           ),
           Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8),
-              child: Image.network(
+              child: Image.asset(
                 widget.product.image,
                 height: 97,
                 //width: ,
@@ -48,7 +55,7 @@ class _ProductItemState extends State<ProductItem> {
                     shape: BoxShape.circle),
                 child: InkWell(
                   child: Padding(
-                    padding: EdgeInsets.all(4.0),
+                    padding: const EdgeInsets.all(4.0),
                     child: Icon(
                       dummyFavorite.contains(widget.product)
                           ? Icons.favorite
@@ -58,13 +65,12 @@ class _ProductItemState extends State<ProductItem> {
                     ),
                   ),
                   onTap: () {
-                    setState(() {
-                      if (dummyFavorite.contains(widget.product)) {
-                        dummyFavorite.remove(widget.product);
-                      } else {
-                        dummyFavorite.add(widget.product);
-                      }
-                    });
+                    if (dummyFavorite.contains(widget.product)) {
+                      dummyFavorite.remove(widget.product);
+                    } else {
+                      dummyFavorite.add(widget.product);
+                    }
+                    setState(() {});
                   },
                 ),
               )),

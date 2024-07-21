@@ -9,51 +9,50 @@ class CatugoryTabInner extends StatelessWidget {
     return Column(
       children: [
         Expanded(
-            child: ListView.builder(
-          itemCount: dummyCategories.length,
-          itemBuilder: (context, index) {
-            return Card(
+          child: ListView.builder(
+            itemCount: dummyCategories.length,
+            itemBuilder: (context, index) {
+              return Card(
+                margin:
+                    const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
                 child: Container(
-                    height: 130,
-                    width: double.infinity,
-                    margin:
-                        EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-                    child: Column(
-                      children: [
-                        Row(
+                  height: 130,
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
                               dummyCategories[index].name,
                               style: const TextStyle(
-                                fontSize: 16,
+                                fontSize: 20,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
-                            SizedBox(
-                              width: 40,
-                            ),
-                            Image.asset(
-                              dummyCategories[index].imgUrl,
-                              height: 120,
-                              //width: double.infinity,
-                              fit: BoxFit.cover,
-                            ),
+                            const SizedBox(height: 8.0),
+                            // Add other details if needed
                           ],
                         ),
-                        // Padding(
-                        //   padding: const EdgeInsets.all(8.0),
-                        //   child: Text(
-                        //     dummyCategories[index].name,
-                        //     style: const TextStyle(
-                        //       fontSize: 16,
-                        //       fontWeight: FontWeight.bold,
-                        //     ),
-                        //   ),
-                        // ),
-                      ],
-                    )));
-          },
-        )),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 16.0),
+                        child: Image.asset(
+                          dummyCategories[index].imgUrl,
+                          height: 120,
+                          width: 130,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            },
+          ),
+        ),
       ],
     );
   }
