@@ -1,10 +1,8 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-//import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ecommerce_app/utils/app_colors.dart';
+import 'package:ecommerce_app/views_models/home_tap_cubit/home_tap_cubit.dart';
 import 'package:flutter/material.dart';
-
 import 'package:ecommerce_app/models/product_models.dart';
-//import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ProductItem extends StatefulWidget {
   const ProductItem({
@@ -25,6 +23,7 @@ class _ProductItemState extends State<ProductItem> {
 
   @override
   Widget build(BuildContext context) {
+    final homeTabCubit = BlocProvider.of<HomeTapCubit>(context);
     return Column(
       children: [
         Stack(
@@ -55,22 +54,36 @@ class _ProductItemState extends State<ProductItem> {
                 child: InkWell(
                   child: Padding(
                     padding: const EdgeInsets.all(4.0),
-                    child: Icon(
-                      dummyFavorite.contains(widget.product)
-                          ? Icons.favorite
-                          : Icons.favorite_border,
-                      size: 16,
-                      color: AppColors.primary,
+                    child: BlocBuilder<HomeTapCubit, HomeTapState>(
+                      bloc: homeTabCubit,
+                      buildWhen: (previous, current) =>
+                          (current is SetFavoritLoading &&
+                              current.favoritid == widget.product.id) ||
+                          (current is SetFavoritSuccess &&
+                              current.favoritid == widget.product.id) ||
+                          current is SetFavoritError,
+                      builder: (context, state) {
+                        if (state is SetFavoritLoading) {
+                          return const CircularProgressIndicator.adaptive();
+                        } else if (state is SetFavoritSuccess) {
+                          return Icon(
+                            state.isFavorit
+                                ? Icons.favorite
+                                : Icons.favorite_border,
+                            size: 16,
+                            color: AppColors.primary,
+                          );
+                        }
+                        return const Icon(
+                          Icons.favorite_border,
+                          size: 16,
+                          color: AppColors.primary,
+                        );
+                      },
                     ),
                   ),
                   onTap: () {
-                    setState(() {
-                      if (dummyFavorite.contains(widget.product)) {
-                        dummyFavorite.remove(widget.product);
-                      } else {
-                        dummyFavorite.add(widget.product);
-                      }
-                    });
+                    homeTabCubit.toggleFavorie(widget.product);
                   },
                 ),
               ),

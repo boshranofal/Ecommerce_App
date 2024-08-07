@@ -1,9 +1,15 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:ecommerce_app/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 
+import 'package:ecommerce_app/utils/app_colors.dart';
+
 class HomeCarouselSlider extends StatefulWidget {
-  const HomeCarouselSlider({super.key});
+  final List<String> imgurls;
+  const HomeCarouselSlider({
+    Key? key,
+    required this.imgurls,
+  }) : super(key: key);
 
   @override
   State<HomeCarouselSlider> createState() => _HomeCarouselSliderState();
@@ -12,15 +18,10 @@ class HomeCarouselSlider extends StatefulWidget {
 class _HomeCarouselSliderState extends State<HomeCarouselSlider> {
   int _current = 0;
   final _controller = CarouselController();
-  final List<String> imgList = [
-    'assets/images/shooping.png',
-    'assets/images/ecommerce.png',
-    // 'https://images.unsplash.com/photo-1508704019882-f9cf40e475b4?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=8c6e5e3aba713b17aa1fe71ab4f0ae5b&auto=format&fit=crop&w=1352&q=80',
-    // 'https://images.unsplash.com/photo-1519985176271-adb1088fa94c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=a0c8d632e977f94e5d312d9893258f59&auto=format&fit=crop&w=1355&q=80'
-  ];
+
   @override
   Widget build(BuildContext context) {
-    final List<Widget> imageSliders = imgList
+    final List<Widget> imageSliders = widget.imgurls
         .map(
           (item) => ClipRRect(
               borderRadius: BorderRadius.all(Radius.circular(5.0)),
@@ -56,7 +57,7 @@ class _HomeCarouselSliderState extends State<HomeCarouselSlider> {
         // ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: imgList.asMap().entries.map((entry) {
+          children: widget.imgurls.asMap().entries.map((entry) {
             return GestureDetector(
               onTap: () => _controller.animateToPage(entry.key),
               child: Container(

@@ -1,0 +1,35 @@
+import 'dart:math';
+
+import 'package:ecommerce_app/models/product_models.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+part 'home_tap_state.dart';
+
+class HomeTapCubit extends Cubit<HomeTapState> {
+  final List<String> imgList = [
+    'assets/images/shooping.png',
+    'assets/images/ecommerce.png',
+  ];
+  HomeTapCubit() : super(HomeInitial());
+
+  void getHomeDate() {
+    emit(HomeLoading());
+    Future.delayed(const Duration(seconds: 1), () {
+      final product = dummyProducts;
+      emit(HomeLoaded(imgurls: imgList, products: product));
+    });
+  }
+
+  void toggleFavorie(ProductModels product) {
+    emit(SetFavoritLoading(favoritid: product.id));
+    Future.delayed(const Duration(milliseconds: 500), () {
+      if (dummyFavorite.contains(product)) {
+        dummyFavorite.remove(product);
+        emit(SetFavoritSuccess(favoritid: product.id, isFavorit: false));
+      } else {
+        dummyFavorite.add(product);
+        emit(SetFavoritSuccess(favoritid: product.id, isFavorit: true));
+      }
+    });
+  }
+}
