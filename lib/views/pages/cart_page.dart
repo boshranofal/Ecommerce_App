@@ -1,5 +1,6 @@
 //import 'package:ecommerce_app/models/catugory_models.dart';
 import 'package:ecommerce_app/models/product_models.dart';
+import 'package:ecommerce_app/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -11,6 +12,7 @@ class CartPage extends StatefulWidget {
 }
 
 class _CartPageState extends State<CartPage> {
+  
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -177,10 +179,11 @@ class _CartPageState extends State<CartPage> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30.0),
                       ),
+                      backgroundColor: AppColors.primary,
                     ),
                     child: const Text(
                       'Checkout',
-                      style: TextStyle(fontSize: 16.0),
+                      style: TextStyle(fontSize: 18.0, color: AppColors.white),
                     ),
                   ),
                 ),
