@@ -19,6 +19,20 @@ final class HomeError extends HomeTapState {
   HomeError({required this.message});
 }
 
+final class CategoryLoading extends HomeTapState {}
+
+final class CategoryLoaded extends HomeTapState {
+  final List<CatugoryModels> categories;
+
+  CategoryLoaded({required this.categories});
+}
+
+final class CategoryError extends HomeTapState {
+  final String message;
+
+  CategoryError({required this.message});
+}
+
 final class SetFavoritLoading extends HomeTapState {
   final String favoritid;
 

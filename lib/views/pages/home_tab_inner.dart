@@ -1,7 +1,9 @@
 import 'package:ecommerce_app/utils/app_colors.dart';
+import 'package:ecommerce_app/views/pages/product_details.dart';
 import 'package:ecommerce_app/views/widget/home_carousel_slider.dart';
 import 'package:ecommerce_app/views/widget/product_item.dart';
 import 'package:ecommerce_app/views_models/home_tap_cubit/home_tap_cubit.dart';
+import 'package:ecommerce_app/views_models/product_datails_cubit/product_datails_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -72,7 +74,18 @@ class HomeTabInner extends StatelessWidget {
                       ),
                       itemBuilder: (context, index) {
                         return InkWell(
-                          onTap: () {},
+                          onTap: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => BlocProvider(
+                                create: (context) {
+                                  final cubit = ProductDatailsCubit();
+                                  cubit.getProductDetails(products[index]);
+                                  return cubit;
+                                },
+                                child: ProductDetails(),
+                              ),
+                            ));
+                          },
                           child: ProductItem(
                             product: products[index],
                           ),

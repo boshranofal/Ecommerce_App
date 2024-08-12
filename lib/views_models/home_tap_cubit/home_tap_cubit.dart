@@ -1,5 +1,6 @@
-import 'dart:math';
+//import 'dart:nativewrappers/_internal/vm/lib/ffi_allocation_patch.dart';
 
+import 'package:ecommerce_app/models/catugory_models.dart';
 import 'package:ecommerce_app/models/product_models.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -17,6 +18,14 @@ class HomeTapCubit extends Cubit<HomeTapState> {
     Future.delayed(const Duration(seconds: 1), () {
       final product = dummyProducts;
       emit(HomeLoaded(imgurls: imgList, products: product));
+    });
+  }
+
+  void getcategory() {
+    emit(CategoryLoading());
+    Future.delayed(const Duration(seconds: 1), () {
+      final category = dummyCategories;
+      emit(CategoryLoaded(categories: category));
     });
   }
 

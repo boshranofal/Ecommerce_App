@@ -1,5 +1,27 @@
 import 'package:ecommerce_app/models/catugory_models.dart';
+
 //import 'package:flutter/foundation.dart';
+enum ProductSize {
+  S,
+  M,
+  L,
+  XL,
+  XXL;
+
+  static ProductSize fromString(String size) {
+    if (size == ProductSize.S.name) {
+      return ProductSize.S;
+    } else if (size == ProductSize.M.name) {
+      return ProductSize.M;
+    } else if (size == ProductSize.L.name) {
+      return ProductSize.L;
+    } else if (size == ProductSize.XL.name) {
+      return ProductSize.XL;
+    } else {
+      return ProductSize.XXL;
+    }
+  }
+}
 
 class ProductModels {
   final String name;
@@ -8,6 +30,8 @@ class ProductModels {
   final double price;
   final String id;
   final CatugoryModels category;
+  final String details =
+      'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry';
   int count = 1;
 
   ProductModels(
@@ -79,7 +103,7 @@ List<ProductModels> dummyProducts = [
       id: '9',
       category: dummyCategories[3]),
   ProductModels(
-      name: 'boot Shoes',
+      name: 'Boot Shoes',
       description: 'Black Shoes',
       image: 'assets/images/boot.png',
       price: 39.99,
