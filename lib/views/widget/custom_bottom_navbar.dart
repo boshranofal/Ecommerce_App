@@ -71,37 +71,4 @@ class _CustomBottomNavbarState extends State<CustomBottomNavbar> {
       ),
     );
   }
-
-  Widget buildtitle() {
-    switch (_currentIndex) {
-      case 0:
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Hi, Boshra',
-              style: Theme.of(context)
-                  .textTheme
-                  .labelLarge!
-                  .copyWith(fontWeight: FontWeight.bold),
-            ),
-            Text(
-              "Let\'s go shopping",
-              style: Theme.of(context).textTheme.labelSmall!.copyWith(
-                  color: AppColors.grey, fontWeight: FontWeight.normal),
-            )
-          ],
-        );
-      case 1:
-        return const Text("Cart");
-      case 2:
-        return const Text(
-          "My Favorite",
-        );
-      case 3:
-        return const Text("My Profile");
-      default:
-        return const Text("Home");
-    }
-  }
 }

@@ -1,3 +1,4 @@
+import 'package:ecommerce_app/models/product_models.dart';
 import 'package:ecommerce_app/utils/app_colors.dart';
 
 import 'package:ecommerce_app/views_models/product_datails_cubit/product_datails_cubit.dart';
@@ -5,9 +6,15 @@ import 'package:flutter/material.dart';
 //import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class ProductDetails extends StatelessWidget {
+class ProductDetails extends StatefulWidget {
   const ProductDetails({super.key});
 
+  @override
+  State<ProductDetails> createState() => _ProductDetailsState();
+}
+
+class _ProductDetailsState extends State<ProductDetails> {
+  int selectedColor = 0;
   @override
   Widget build(BuildContext context) {
     final detailscubit = BlocProvider.of<ProductDatailsCubit>(context);
@@ -24,7 +31,7 @@ class ProductDetails extends StatelessWidget {
             );
           } else if (state is ProductDatailsLoaded) {
             return Scaffold(
-              backgroundColor: const Color.fromARGB(255, 235, 224, 224),
+              backgroundColor: const Color.fromARGB(255, 227, 212, 212),
               appBar: AppBar(
                 actions: const [Icon(Icons.shopping_bag_outlined)],
                 centerTitle: true,
@@ -34,10 +41,10 @@ class ProductDetails extends StatelessWidget {
                 ),
               ),
               body: SafeArea(
-                  //top: false,
-                  child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
+                //top: false,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
                     Center(
                       child: Image.asset(
                         state.product.image,
@@ -83,19 +90,26 @@ class ProductDetails extends StatelessWidget {
                                       child: Row(
                                         children: [
                                           IconButton(
-                                            onPressed: () {},
+                                            onPressed: () {
+                                              detailscubit.decrementCounter(
+                                                  state.product);
+                                            },
                                             icon: const Icon(Icons.remove),
                                           ),
                                           const SizedBox(width: 8),
                                           Text(
-                                            detailscubit.counter.toString(),
+                                            '${state.product.quantity}',
                                             style: Theme.of(context)
                                                 .textTheme
                                                 .titleMedium,
                                           ),
                                           const SizedBox(width: 8),
                                           IconButton(
-                                            onPressed: () {},
+                                            onPressed: () {
+                                              detailscubit.incrementCounter(
+                                                state.product,
+                                              );
+                                            },
                                             icon: const Icon(Icons.add),
                                           ),
                                         ],
@@ -132,50 +146,29 @@ class ProductDetails extends StatelessWidget {
                                             color: Colors.black,
                                             fontWeight: FontWeight.bold)),
                                 const SizedBox(height: 8),
-                                Row(
-                                  children: [
-                                    Container(
-                                      width: 30,
-                                      height: 30,
-                                      decoration: const BoxDecoration(
-                                        color: Color(0XFF800000),
-                                        shape: BoxShape.circle,
-                                      ),
-                                    ),
-                                    const SizedBox(
-                                      width: 8,
-                                    ),
-                                    Container(
-                                      width: 30,
-                                      height: 30,
-                                      decoration: const BoxDecoration(
-                                        color: Color(0XFFEAC117),
-                                        shape: BoxShape.circle,
-                                      ),
-                                    ),
-                                    const SizedBox(
-                                      width: 8,
-                                    ),
-                                    Container(
-                                      width: 30,
-                                      height: 30,
-                                      decoration: const BoxDecoration(
-                                        color: Color(0XFFAB784E),
-                                        shape: BoxShape.circle,
-                                      ),
-                                    ),
-                                    const SizedBox(
-                                      width: 8,
-                                    ),
-                                    Container(
-                                      width: 30,
-                                      height: 30,
-                                      decoration: const BoxDecoration(
-                                        color: Color(0XFFE67451),
-                                        shape: BoxShape.circle,
-                                      ),
-                                    ),
-                                  ],
+                                SizedBox(
+                                  height: 50,
+                                  child: ListView.builder(
+                                    itemCount: colors.length,
+                                    scrollDirection: Axis.horizontal,
+                                    itemBuilder: (context, index) {
+                                      return Padding(
+                                        padding:
+                                            const EdgeInsets.only(right: 8),
+                                        child: GestureDetector(
+                                          onTap: () {
+                                            setState(() {
+                                              selectedColor = index;
+                                            });
+                                          },
+                                          child: ColorWidget(
+                                            color: colors[index],
+                                            isSelect: selectedColor == index,
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                  ),
                                 ),
                                 const SizedBox(
                                   height: 16,
@@ -237,7 +230,9 @@ class ProductDetails extends StatelessWidget {
                         ),
                       ),
                     )
-                  ])),
+                  ],
+                ),
+              ),
             );
           } else {
             return const SizedBox();
@@ -245,3 +240,29 @@ class ProductDetails extends StatelessWidget {
         });
   }
 }
+
+class ColorWidget extends StatelessWidget {
+  const ColorWidget({super.key, required this.color, this.isSelect = false});
+  final Color color;
+  final bool isSelect;
+  @override
+  Widget build(BuildContext context) {
+    return CircleAvatar(
+      radius: 28,
+      backgroundColor: isSelect ? Colors.grey : color,
+      child: CircleAvatar(
+        radius: 22,
+        backgroundColor: color,
+      ),
+    );
+  }
+}
+
+List<Color> colors = [
+  Colors.red,
+  Colors.blue,
+  Colors.green,
+  Colors.yellow,
+  Colors.purple,
+  Colors.orange,
+];

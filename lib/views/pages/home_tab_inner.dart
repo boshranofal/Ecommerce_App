@@ -82,7 +82,7 @@ class HomeTabInner extends StatelessWidget {
                                   cubit.getProductDetails(products[index]);
                                   return cubit;
                                 },
-                                child: ProductDetails(),
+                                child: const ProductDetails(),
                               ),
                             ));
                           },

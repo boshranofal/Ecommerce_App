@@ -32,15 +32,26 @@ class ProductModels {
   final CatugoryModels category;
   final String details =
       'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry';
-  int count = 1;
+  int quantity = 1;
 
-  ProductModels(
-      {required this.name,
-      required this.description,
-      required this.image,
-      required this.price,
-      required this.id,
-      required this.category});
+  ProductModels({
+    required this.name,
+    required this.description,
+    required this.image,
+    required this.price,
+    required this.id,
+    required this.category,
+  });
+
+  void incrementCounter() {
+    quantity++;
+  }
+
+  void decrementCounter() {
+    if (quantity > 1) {
+      quantity--;
+    }
+  }
 }
 
 List<ProductModels> dummyFavorite = [];

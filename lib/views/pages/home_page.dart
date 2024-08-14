@@ -13,6 +13,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
+    //int currentIndex = 0;
     return Scaffold(
         appBar: AppBar(
           leading: const Padding(
@@ -22,7 +23,7 @@ class _HomePageState extends State<HomePage> {
                   AssetImage('assets/images/profile_image.jpg', bundle: null),
             ),
           ),
-          //title: buildtitle(),
+          title: buildtitle(),
           actions: [
             IconButton(onPressed: () {}, icon: const Icon(Icons.search)),
             IconButton(onPressed: () {}, icon: const Icon(Icons.notifications))
@@ -54,37 +55,26 @@ class _HomePageState extends State<HomePage> {
           ),
         ));
   }
-  //  Widget buildtitle() {
 
-  //   switch (_currentIndex) {
-  //     case 0:
-  //       return Column(
-  //         crossAxisAlignment: CrossAxisAlignment.start,
-  //         children: [
-  //           Text(
-  //             'Hi, Boshra',
-  //             style: Theme.of(context)
-  //                 .textTheme
-  //                 .labelLarge!
-  //                 .copyWith(fontWeight: FontWeight.bold),
-  //           ),
-  //           Text(
-  //             "Let\'s go shopping",
-  //             style: Theme.of(context).textTheme.labelSmall!.copyWith(
-  //                 color: AppColors.grey, fontWeight: FontWeight.normal),
-  //           )
-  //         ],
-  //       );
-  //     case 1:
-  //       return const Text("Cart");
-  //     case 2:
-  //       return const Text(
-  //         "My Favorite",
-  //       );
-  //     case 3:
-  //       return const Text("My Profile");
-  //     default:
-  //       return const Text("Home");
-  //   }
-  // }
+  Widget buildtitle() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Hi, Boshra',
+          style: Theme.of(context)
+              .textTheme
+              .labelLarge!
+              .copyWith(fontWeight: FontWeight.bold),
+        ),
+        Text(
+          "Let\'s go shopping",
+          style: Theme.of(context)
+              .textTheme
+              .labelSmall!
+              .copyWith(color: AppColors.grey, fontWeight: FontWeight.normal),
+        )
+      ],
+    );
+  }
 }
