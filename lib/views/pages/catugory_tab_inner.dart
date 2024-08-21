@@ -11,12 +11,16 @@ class CatugoryTabInner extends StatelessWidget {
     final categortTabCubit = BlocProvider.of<HomeTapCubit>(context);
     return BlocBuilder<HomeTapCubit, HomeTapState>(
       bloc: categortTabCubit,
+      buildWhen: (previous, current) =>
+          current is CategoryLoaded ||
+          current is CategoryLoading ||
+          current is CategoryError,
       builder: (context, state) {
-        if (state is HomeLoading) {
+        if (state is CategoryLoading) {
           return const Center(
             child: CircularProgressIndicator.adaptive(),
           );
-        } else if (state is HomeLoaded) {
+        } else if (state is CategoryLoaded) {
           return Column(
             children: [
               Expanded(
