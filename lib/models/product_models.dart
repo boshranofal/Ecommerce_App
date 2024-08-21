@@ -33,6 +33,7 @@ class ProductModels {
   final String details =
       'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry';
   int quantity = 1;
+  int selectecolor = 0;
 
   ProductModels({
     required this.name,
@@ -51,6 +52,10 @@ class ProductModels {
     if (quantity > 1) {
       quantity--;
     }
+  }
+
+  void selectColor(int index) {
+    selectecolor = index;
   }
 }
 
