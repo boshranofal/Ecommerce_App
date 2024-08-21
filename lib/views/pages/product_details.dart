@@ -1,20 +1,12 @@
-import 'package:ecommerce_app/models/product_models.dart';
 import 'package:ecommerce_app/utils/app_colors.dart';
-
+import 'package:ecommerce_app/views/widget/color_widget.dart';
 import 'package:ecommerce_app/views_models/product_datails_cubit/product_datails_cubit.dart';
 import 'package:flutter/material.dart';
-//import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class ProductDetails extends StatefulWidget {
+class ProductDetails extends StatelessWidget {
   const ProductDetails({super.key});
 
-  @override
-  State<ProductDetails> createState() => _ProductDetailsState();
-}
-
-class _ProductDetailsState extends State<ProductDetails> {
-  int selectedColor = 0;
   @override
   Widget build(BuildContext context) {
     final detailscubit = BlocProvider.of<ProductDatailsCubit>(context);
@@ -157,13 +149,14 @@ class _ProductDetailsState extends State<ProductDetails> {
                                             const EdgeInsets.only(right: 8),
                                         child: GestureDetector(
                                           onTap: () {
-                                            setState(() {
-                                              selectedColor = index;
-                                            });
+                                            detailscubit.selectColor(
+                                                state.product, index);
                                           },
                                           child: ColorWidget(
                                             color: colors[index],
-                                            isSelect: selectedColor == index,
+                                            isSelect:
+                                                state.product.selectecolor ==
+                                                    index,
                                           ),
                                         ),
                                       );
@@ -204,7 +197,9 @@ class _ProductDetailsState extends State<ProductDetails> {
                                               fontWeight: FontWeight.bold),
                                     ),
                                     ElevatedButton(
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        detailscubit.togglecart(state.product);
+                                      },
                                       style: ElevatedButton.styleFrom(
                                         backgroundColor: AppColors.primary,
                                         shape: RoundedRectangleBorder(
@@ -212,15 +207,21 @@ class _ProductDetailsState extends State<ProductDetails> {
                                               BorderRadius.circular(16),
                                         ),
                                       ),
-                                      child: const Row(
+                                      child: Row(
                                         children: [
-                                          Icon(Icons.shopping_bag,
-                                              color: Colors.white),
-                                          SizedBox(width: 4),
-                                          Text('Add to cart',
-                                              style: TextStyle(
+                                          const Icon(
+                                            Icons.shopping_bag,
+                                            color: Colors.white,
+                                          ),
+                                          Text(
+                                            'Add to Cart',
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .titleMedium!
+                                                .copyWith(
                                                   color: Colors.white,
-                                                  fontWeight: FontWeight.w400)),
+                                                ),
+                                          ),
                                         ],
                                       ),
                                     ),
@@ -241,28 +242,9 @@ class _ProductDetailsState extends State<ProductDetails> {
   }
 }
 
-class ColorWidget extends StatelessWidget {
-  const ColorWidget({super.key, required this.color, this.isSelect = false});
-  final Color color;
-  final bool isSelect;
-  @override
-  Widget build(BuildContext context) {
-    return CircleAvatar(
-      radius: 28,
-      backgroundColor: isSelect ? Colors.grey : color,
-      child: CircleAvatar(
-        radius: 22,
-        backgroundColor: color,
-      ),
-    );
-  }
-}
-
-List<Color> colors = [
-  Colors.red,
-  Colors.blue,
-  Colors.green,
-  Colors.yellow,
-  Colors.purple,
-  Colors.orange,
+List<Color> colors = const [
+  Color(0XFF808000),
+  Color(0XFFAB784E),
+  Color(0XFF9E4638),
+  Color(0XFFE55451),
 ];
