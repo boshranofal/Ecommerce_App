@@ -1,5 +1,6 @@
 import 'package:ecommerce_app/utils/app_colors.dart';
 import 'package:ecommerce_app/views/widget/color_widget.dart';
+import 'package:ecommerce_app/views/widget/counter_details_widget.dart';
 import 'package:ecommerce_app/views_models/product_datails_cubit/product_datails_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,6 +12,10 @@ class ProductDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     final detailscubit = BlocProvider.of<ProductDatailsCubit>(context);
     return BlocBuilder<ProductDatailsCubit, ProductDatailsState>(
+        buildWhen: (previous, current) =>
+            current is ProductDatailsLoaded ||
+            current is ProductDatailsError ||
+            current is ProductDatailsLoading,
         bloc: detailscubit,
         builder: (context, state) {
           if (state is ProductDatailsLoading) {
@@ -22,6 +27,7 @@ class ProductDetails extends StatelessWidget {
               child: Text(state.message),
             );
           } else if (state is ProductDatailsLoaded) {
+            final product = state.product;
             return Scaffold(
               backgroundColor: const Color.fromARGB(255, 227, 212, 212),
               appBar: AppBar(
@@ -74,38 +80,25 @@ class ProductDetails extends StatelessWidget {
                                               color: Colors.black,
                                               fontWeight: FontWeight.bold),
                                     ),
-                                    DecoratedBox(
-                                      decoration: BoxDecoration(
-                                        color: AppColors.grey2,
-                                        borderRadius: BorderRadius.circular(16),
-                                      ),
-                                      child: Row(
-                                        children: [
-                                          IconButton(
-                                            onPressed: () {
-                                              detailscubit.decrementCounter(
-                                                  state.product);
-                                            },
-                                            icon: const Icon(Icons.remove),
-                                          ),
-                                          const SizedBox(width: 8),
-                                          Text(
-                                            '${state.product.quantity}',
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .titleMedium,
-                                          ),
-                                          const SizedBox(width: 8),
-                                          IconButton(
-                                            onPressed: () {
-                                              detailscubit.incrementCounter(
-                                                state.product,
-                                              );
-                                            },
-                                            icon: const Icon(Icons.add),
-                                          ),
-                                        ],
-                                      ),
+                                    BlocBuilder<ProductDatailsCubit,
+                                        ProductDatailsState>(
+                                      bloc: detailscubit,
+                                      buildWhen: (previous, current) =>
+                                          current is QuantityChanged,
+                                      builder: (context, state) {
+                                        if (state is QuantityChanged) {
+                                          final counter = state.quantity;
+                                          return CounterDetailsWidget(
+                                            cubit: detailscubit,
+                                            counter: counter,
+                                          );
+                                        } else {
+                                          return CounterDetailsWidget(
+                                            cubit: detailscubit,
+                                            counter: 1,
+                                          );
+                                        }
+                                      },
                                     ),
                                   ],
                                 ),
@@ -196,35 +189,121 @@ class ProductDetails extends StatelessWidget {
                                               color: Colors.black,
                                               fontWeight: FontWeight.bold),
                                     ),
-                                    ElevatedButton(
-                                      onPressed: () {
-                                        detailscubit.togglecart(state.product);
-                                      },
-                                      style: ElevatedButton.styleFrom(
-                                        backgroundColor: AppColors.primary,
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(16),
-                                        ),
-                                      ),
-                                      child: Row(
-                                        children: [
-                                          const Icon(
-                                            Icons.shopping_bag,
-                                            color: Colors.white,
-                                          ),
-                                          Text(
-                                            'Add to Cart',
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .titleMedium!
-                                                .copyWith(
-                                                  color: Colors.white,
-                                                ),
-                                          ),
-                                        ],
+                                    SizedBox(
+                                      height: 50,
+                                      child: BlocConsumer<ProductDatailsCubit,
+                                          ProductDatailsState>(
+                                        bloc: detailscubit,
+                                        listenWhen: (previous, current) =>
+                                            current is SetCartError,
+                                        listener: (context, state) {
+                                          if (state is SetCartAdded) {
+                                            showDialog(
+                                              context: context,
+                                              builder: (context) {
+                                                return AlertDialog(
+                                                  title: const Text('Alert !'),
+                                                  content: const Text(
+                                                      'You must select a size !'),
+                                                  actions: [
+                                                    TextButton(
+                                                      onPressed: () =>
+                                                          Navigator.pop(
+                                                              context),
+                                                      child: const Text('OK'),
+                                                    ),
+                                                  ],
+                                                );
+                                              },
+                                            );
+                                          }
+                                        },
+                                        buildWhen: (previous, current) =>
+                                            current is SetCartAdding ||
+                                            current is SetCartAdded ||
+                                            current is SetCartError,
+                                        builder: (context, state) {
+                                          if (state is SetCartAdding) {
+                                            return ElevatedButton(
+                                              onPressed: null,
+                                              style: ElevatedButton.styleFrom(
+                                                  backgroundColor:
+                                                      AppColors.primary,
+                                                  foregroundColor:
+                                                      AppColors.white,
+                                                  shape: RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              16))),
+                                              child: const Center(
+                                                child: CircularProgressIndicator
+                                                    .adaptive(),
+                                              ),
+                                            );
+                                          } else if (state is SetCartAdded) {
+                                            return ElevatedButton(
+                                              onPressed: null,
+                                              style: ElevatedButton.styleFrom(
+                                                  backgroundColor:
+                                                      AppColors.primary,
+                                                  foregroundColor:
+                                                      AppColors.white,
+                                                  shape: RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              16))),
+                                              child: const Text('Added !'),
+                                            );
+                                          } else {
+                                            return ElevatedButton(
+                                              onPressed: () {
+                                                detailscubit
+                                                    .togglecart(product);
+                                              },
+                                              style: ElevatedButton.styleFrom(
+                                                  backgroundColor:
+                                                      AppColors.primary,
+                                                  foregroundColor:
+                                                      AppColors.white,
+                                                  shape: RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              16))),
+                                              child: const Text('Add to cart'),
+                                            );
+                                          }
+                                        },
                                       ),
                                     ),
+                                    // ElevatedButton(
+                                    //   onPressed: () {
+                                    //     detailscubit.togglecart(state.product);
+                                    //   },
+                                    //   style: ElevatedButton.styleFrom(
+                                    //     backgroundColor: const Color.fromRGBO(81, 78, 182, 1),
+                                    //     shape: RoundedRectangleBorder(
+                                    //       borderRadius:
+                                    //           BorderRadius.circular(16),
+                                    //     ),
+                                    //   ),
+                                    //   child: Row(
+                                    //     children: [
+                                    //       const Icon(
+                                    //         Icons.shopping_bag,
+                                    //         color: Colors.white,
+                                    //       ),
+                                    //       Text(
+                                    //         'Add to Cart',
+                                    //         style: Theme.of(context)
+                                    //             .textTheme
+                                    //             .titleMedium!
+                                    //             .copyWith(
+                                    //               color: Colors.white,
+                                    //             ),
+                                    //       ),
+                                    //     ],
+                                    //   ),
+                                    // ),
                                   ],
                                 ),
                               ]),
