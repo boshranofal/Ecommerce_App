@@ -1,27 +1,6 @@
 import 'package:ecommerce_app/models/catugory_models.dart';
 
 //import 'package:flutter/foundation.dart';
-enum ProductSize {
-  S,
-  M,
-  L,
-  XL,
-  XXL;
-
-  static ProductSize fromString(String size) {
-    if (size == ProductSize.S.name) {
-      return ProductSize.S;
-    } else if (size == ProductSize.M.name) {
-      return ProductSize.M;
-    } else if (size == ProductSize.L.name) {
-      return ProductSize.L;
-    } else if (size == ProductSize.XL.name) {
-      return ProductSize.XL;
-    } else {
-      return ProductSize.XXL;
-    }
-  }
-}
 
 class ProductModels {
   final String name;
@@ -32,7 +11,7 @@ class ProductModels {
   final CatugoryModels category;
   final String details =
       'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry';
-  int quantity = 1;
+  //int quantity = 1;
   int selectecolor = 0;
 
   ProductModels({
@@ -44,15 +23,15 @@ class ProductModels {
     required this.category,
   });
 
-  void incrementCounter() {
-    quantity++;
-  }
+  // void incrementCounter() {
+  //   quantity++;
+  // }
 
-  void decrementCounter() {
-    if (quantity > 1) {
-      quantity--;
-    }
-  }
+  // void decrementCounter() {
+  //   if (quantity > 1) {
+  //     quantity--;
+  //   }
+  // }
 
   void selectColor(int index) {
     selectecolor = index;
@@ -60,7 +39,7 @@ class ProductModels {
 }
 
 List<ProductModels> dummyFavorite = [];
-List<ProductModels> dummyCart = [];
+
 List<ProductModels> dummyProducts = [
   ProductModels(
       name: 'Ipad Pro',
