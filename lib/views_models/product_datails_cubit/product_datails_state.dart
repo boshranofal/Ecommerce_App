@@ -30,29 +30,26 @@ final class ProductDatailsAddToCart extends ProductDatailsState {
   ProductDatailsAddToCart({required this.product});
 }
 
-final class Adding extends ProductDatailsState {}
-
-final class Added extends ProductDatailsState {
-  final List<ProductModels> product;
-
-  Added({required this.product});
-}
-
-final class AddError extends ProductDatailsState {
-  final String message;
-
-  AddError({required this.message});
-}
-
 final class SetCartAdding extends ProductDatailsState {
-  final String id;
+  // final String id;
 
-  SetCartAdding({required this.id});
+  // SetCartAdding({required this.id});
 }
 
 final class SetCartAdded extends ProductDatailsState {
-  final String id;
-  final bool isCart;
+  final ProductModels product;
 
-  SetCartAdded({required this.id, required this.isCart});
+  SetCartAdded({required this.product});
+}
+
+final class SetCartError extends ProductDatailsState {
+  final String message;
+
+  SetCartError({required this.message});
+}
+
+final class QuantityChanged extends ProductDatailsState {
+  final int quantity;
+
+  QuantityChanged(this.quantity);
 }

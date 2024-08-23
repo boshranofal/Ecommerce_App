@@ -14,21 +14,21 @@ class HomeTapCubit extends Cubit<HomeTapState> {
   HomeTapCubit() : super(HomeInitial());
 
   void getHomeDate() {
-    print("getHomeDate");
+    //print("getHomeDate");
     emit(HomeLoading());
     Future.delayed(const Duration(seconds: 1), () {
       final product = dummyProducts;
-      print("HomeLoded");
+      //print("HomeLoded");
       emit(HomeLoaded(imgurls: imgList, products: product));
     });
   }
 
   void getcategory() {
-    print("getcategory");
+    //print("getcategory");
     emit(CategoryLoading());
     Future.delayed(const Duration(seconds: 1), () {
       final category = dummyCategories;
-      print("CategoryLoded");
+      //print("CategoryLoded");
       emit(CategoryLoaded(categories: category));
     });
   }
