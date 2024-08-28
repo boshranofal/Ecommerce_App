@@ -1,4 +1,6 @@
 import 'package:ecommerce_app/utils/app_constants.dart';
+import 'package:ecommerce_app/utils/app_router.dart';
+import 'package:ecommerce_app/utils/app_routes.dart';
 import 'package:ecommerce_app/utils/app_theme.dart';
 //import 'package:ecommerce_app/views/pages/home_page.dart';
 import 'package:ecommerce_app/views/widget/custom_bottom_navbar.dart';
@@ -17,8 +19,9 @@ class EcommerceApp extends StatelessWidget {
     return MaterialApp(
       title: AppConstants.appName,
       theme: AppTheme.lightTheme(),
-      home: const CustomBottomNavbar(),
+      initialRoute: AppRoutes.home,
       debugShowCheckedModeBanner: false,
+      onGenerateRoute: AppRouter.onGenerateRout,
     );
   }
 }
