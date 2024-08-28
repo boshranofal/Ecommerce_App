@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1004132633284",
+    "project_id": "ecommerce-app-b7ef9",
+    "storage_bucket": "ecommerce-app-b7ef9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1004132633284:android:597085e40b58ba4bc25791",
+        "android_client_info": {
+          "package_name": "com.boshranofal.ecommerce"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDFkx3zzRdktOcLL6X7991KZCTXzW3_mIA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
