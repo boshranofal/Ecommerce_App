@@ -1,7 +1,6 @@
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ecommerce_app/models/cart_models.dart';
-import 'package:ecommerce_app/models/product_models.dart';
-import 'package:meta/meta.dart';
+//import 'package:meta/meta.dart';
 
 part 'cart_state.dart';
 

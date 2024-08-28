@@ -32,7 +32,7 @@ class _CustomBottomNavbarState extends State<CustomBottomNavbar> {
             create: (context) {
               final cubit = HomeTapCubit();
               cubit.getHomeDate();
-              //cubit.getcategory();
+              cubit.getcategory();
               return cubit;
             },
             child: const HomePage(),
