@@ -1,7 +1,9 @@
 import 'package:ecommerce_app/utils/app_colors.dart';
 import 'package:ecommerce_app/views/pages/catugory_tab_inner.dart';
 import 'package:ecommerce_app/views/pages/home_tab_inner.dart';
+import 'package:ecommerce_app/views_models/home_tap_cubit/home_tap_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -29,25 +31,32 @@ class _HomePageState extends State<HomePage> {
             IconButton(onPressed: () {}, icon: const Icon(Icons.notifications))
           ],
         ),
-        body: const DefaultTabController(
+        body: DefaultTabController(
           length: 2,
           child: Column(
             children: [
-              TabBar(
+              const TabBar(
                 dividerHeight: 0,
                 tabs: [
                   Tab(text: 'Home'),
                   Tab(text: 'Catugory'),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 8,
               ),
               Expanded(
                 child: TabBarView(
                   children: [
-                    HomeTabInner(),
-                    CatugoryTabInner(),
+                    const HomeTabInner(),
+                    BlocProvider(
+                      create: (context) {
+                        final catugoryCubit = HomeTapCubit();
+                        catugoryCubit.getcategory();
+                        return catugoryCubit;
+                      },
+                      child: CatugoryTabInner(),
+                    ),
                   ],
                 ),
               )
