@@ -1,21 +1,40 @@
 {
   "project_info": {
-    "project_number": "1004132633284",
-    "project_id": "ecommerce-app-b7ef9",
-    "storage_bucket": "ecommerce-app-b7ef9.appspot.com"
+    "project_number": "388544869854",
+    "project_id": "project-ff85d",
+    "storage_bucket": "project-ff85d.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1004132633284:android:597085e40b58ba4bc25791",
+        "mobilesdk_app_id": "1:388544869854:android:c943513fe6435929b0d94f",
         "android_client_info": {
-          "package_name": "com.boshranofal.ecommerce"
+          "package_name": "com.example.app"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyDFkx3zzRdktOcLL6X7991KZCTXzW3_mIA"
+          "current_key": "AIzaSyCosq9-y4JGqLWOtC2PS9vvu4wblSrvHZU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:388544869854:android:5e06d2041f8ef96eb0d94f",
+        "android_client_info": {
+          "package_name": "com.example.ecommerce_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCosq9-y4JGqLWOtC2PS9vvu4wblSrvHZU"
         }
       ],
       "services": {

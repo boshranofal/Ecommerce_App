@@ -23,10 +23,7 @@ class DefaultFirebaseOptions {
       case TargetPlatform.android:
         return android;
       case TargetPlatform.iOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for ios - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return ios;
       case TargetPlatform.macOS:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for macos - '
@@ -57,20 +54,30 @@ class DefaultFirebaseOptions {
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyDFkx3zzRdktOcLL6X7991KZCTXzW3_mIA',
-    appId: '1:1004132633284:android:597085e40b58ba4bc25791',
-    messagingSenderId: '1004132633284',
-    projectId: 'ecommerce-app-b7ef9',
-    storageBucket: 'ecommerce-app-b7ef9.appspot.com',
+    apiKey: 'AIzaSyCosq9-y4JGqLWOtC2PS9vvu4wblSrvHZU',
+    appId: '1:388544869854:android:5e06d2041f8ef96eb0d94f',
+    messagingSenderId: '388544869854',
+    projectId: 'project-ff85d',
+    storageBucket: 'project-ff85d.appspot.com',
   );
 
   static const FirebaseOptions windows = FirebaseOptions(
-    apiKey: 'AIzaSyCmT3bkjYXGVDjnp_6slztNydSeE2R5C18',
-    appId: '1:1004132633284:web:79c010965cd1bc38c25791',
-    messagingSenderId: '1004132633284',
-    projectId: 'ecommerce-app-b7ef9',
-    authDomain: 'ecommerce-app-b7ef9.firebaseapp.com',
-    storageBucket: 'ecommerce-app-b7ef9.appspot.com',
-    measurementId: 'G-XTY0LE8K1C',
+    apiKey: 'AIzaSyCollr0jMkwASUGzrv6uaN6TMDygvkyN_w',
+    appId: '1:388544869854:web:160e57412855a603b0d94f',
+    messagingSenderId: '388544869854',
+    projectId: 'project-ff85d',
+    authDomain: 'project-ff85d.firebaseapp.com',
+    storageBucket: 'project-ff85d.appspot.com',
+    measurementId: 'G-4P6XC4WTRC',
   );
+
+  static const FirebaseOptions ios = FirebaseOptions(
+    apiKey: 'AIzaSyBS-MrLWfgKFfpRANZJ33KZn2BUt_pV4YE',
+    appId: '1:388544869854:ios:dcd9ad92f487f111b0d94f',
+    messagingSenderId: '388544869854',
+    projectId: 'project-ff85d',
+    storageBucket: 'project-ff85d.appspot.com',
+    iosBundleId: 'com.example.ecommerceApp',
+  );
+
 }
