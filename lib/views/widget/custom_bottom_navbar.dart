@@ -4,8 +4,8 @@ import 'package:ecommerce_app/views/pages/favorite_page.dart';
 import 'package:ecommerce_app/views/pages/home_page.dart';
 import 'package:ecommerce_app/views/pages/profile_page.dart';
 import 'package:ecommerce_app/views_models/cart_cubit/cart_cubit.dart';
+import 'package:ecommerce_app/views_models/cubit/profile_cubit.dart';
 import 'package:ecommerce_app/views_models/home_tap_cubit/home_tap_cubit.dart';
-import 'package:ecommerce_app/views_models/product_datails_cubit/product_datails_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent_bottom_nav_bar_v2.dart';
@@ -18,13 +18,13 @@ class CustomBottomNavbar extends StatefulWidget {
 }
 
 class _CustomBottomNavbarState extends State<CustomBottomNavbar> {
-  int _currentIndex = 0;
+  //int _currentIndex = 0;
   @override
   Widget build(BuildContext context) {
     return PersistentTabView(
       stateManagement: false,
       onTabChanged: (value) => setState(() {
-        _currentIndex = value;
+        //_currentIndex = value;
       }),
       tabs: [
         PersistentTabConfig(
@@ -32,7 +32,7 @@ class _CustomBottomNavbarState extends State<CustomBottomNavbar> {
             create: (context) {
               final cubit = HomeTapCubit();
               cubit.getHomeDate();
-              cubit.getcategory();
+              //cubit.getcategory();
               return cubit;
             },
             child: const HomePage(),
@@ -67,7 +67,14 @@ class _CustomBottomNavbarState extends State<CustomBottomNavbar> {
               inactiveBackgroundColor: AppColors.grey5),
         ),
         PersistentTabConfig(
-          screen: const ProfilePage(),
+          screen: BlocProvider(
+            create: (context) {
+              final cubit = ProfileCubit();
+              cubit.getProfileData();
+              return cubit;
+            },
+            child: const ProfilePage(),
+          ),
           item: ItemConfig(
               icon: const Icon(Icons.person),
               title: "Profile",

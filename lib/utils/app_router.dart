@@ -4,7 +4,7 @@ import 'package:ecommerce_app/views/pages/product_details.dart';
 import 'package:ecommerce_app/views/widget/custom_bottom_navbar.dart';
 import 'package:ecommerce_app/views_models/product_datails_cubit/product_datails_cubit.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+//import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AppRouter {

@@ -52,6 +52,9 @@ class _ProductItemState extends State<ProductItem> {
                   shape: BoxShape.circle,
                 ),
                 child: InkWell(
+                  onTap: () {
+                    homeTabCubit.toggleFavorie(widget.product);
+                  },
                   child: Padding(
                     padding: const EdgeInsets.all(4.0),
                     child: BlocBuilder<HomeTapCubit, HomeTapState>(
@@ -64,7 +67,9 @@ class _ProductItemState extends State<ProductItem> {
                           current is SetFavoritError,
                       builder: (context, state) {
                         if (state is SetFavoritLoading) {
-                          return const CircularProgressIndicator.adaptive();
+                          return const CircularProgressIndicator.adaptive(
+                            strokeWidth: 1,
+                          );
                         } else if (state is SetFavoritSuccess) {
                           return Icon(
                             state.isFavorit
@@ -82,9 +87,6 @@ class _ProductItemState extends State<ProductItem> {
                       },
                     ),
                   ),
-                  onTap: () {
-                    homeTabCubit.toggleFavorie(widget.product);
-                  },
                 ),
               ),
             ),
