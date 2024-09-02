@@ -1,6 +1,6 @@
 import 'package:ecommerce_app/models/profile_models.dart';
 import 'package:ecommerce_app/utils/app_colors.dart';
-import 'package:ecommerce_app/views_models/cubit/profile_cubit.dart';
+import 'package:ecommerce_app/views_models/auth_cubit/profile_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

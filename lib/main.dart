@@ -27,7 +27,7 @@ class EcommerceApp extends StatelessWidget {
     return MaterialApp(
       title: AppConstants.appName,
       theme: AppTheme.lightTheme(),
-      initialRoute: AppRoutes.home,
+      initialRoute: AppRoutes.signin,
       debugShowCheckedModeBanner: false,
       onGenerateRoute: AppRouter.onGenerateRout,
     );
