@@ -3,6 +3,7 @@ class AppRoutes {
   static const String productdetails = '/product-detail';
   static const String cart = '/cart';
   static const String signin = '/';
+  static const String signup = '/signup';
   // static const ORDERS = '/orders';
   // static const USER_PRODUCTS = '/user-products';
   // static const EDIT_PRODUCT = '/edit-product';

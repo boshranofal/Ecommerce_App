@@ -12,3 +12,7 @@ final class AuthError extends AuthState {
   final String message;
   AuthError(this.message);
 }
+
+final class SiginingOut extends AuthState {}
+
+final class SiginedOut extends AuthState {}

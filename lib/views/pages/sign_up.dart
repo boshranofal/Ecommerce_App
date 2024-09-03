@@ -3,19 +3,19 @@ import 'package:ecommerce_app/utils/app_routes.dart';
 import 'package:ecommerce_app/views/widget/main_button.dart';
 import 'package:ecommerce_app/views_models/auth_cubit/auth_cubit.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class SignIn extends StatefulWidget {
-  const SignIn({super.key});
+class SignUp extends StatefulWidget {
+  const SignUp({super.key});
 
   @override
-  State<SignIn> createState() => _SignInState();
+  State<SignUp> createState() => _SignUpState();
 }
 
-class _SignInState extends State<SignIn> {
+class _SignUpState extends State<SignUp> {
   bool isSecured = true;
   final formKey = GlobalKey<FormState>();
+  final usernameController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   @override
@@ -32,7 +32,7 @@ class _SignInState extends State<SignIn> {
             children: [
               const SizedBox(height: 30),
               Text(
-                "Login Account",
+                "Create Account",
                 style: Theme.of(context)
                     .textTheme
                     .headlineLarge!
@@ -44,6 +44,28 @@ class _SignInState extends State<SignIn> {
                         color: Colors.grey,
                       )),
               const SizedBox(height: 36),
+              Text('Username',
+                  style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                        fontWeight: FontWeight.bold,
+                      )),
+              const SizedBox(height: 8),
+              TextFormField(
+                controller: usernameController,
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return "Username is required";
+                  }
+                  return null;
+                },
+                decoration: InputDecoration(
+                  hintText: "Enter your username",
+                  hintStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                        color: Colors.grey,
+                      ),
+                  prefixIcon: const Icon(Icons.person_outline),
+                  prefixIconColor: AppColors.grey5,
+                ),
+              ),
               Text("Email",
                   style: Theme.of(context).textTheme.titleLarge!.copyWith(
                         fontWeight: FontWeight.bold,
@@ -109,18 +131,6 @@ class _SignInState extends State<SignIn> {
                   ),
                 ),
               ),
-              Align(
-                alignment: Alignment.centerRight,
-                child: TextButton(
-                  onPressed: () {},
-                  child: Text(
-                    "Forgot Password?",
-                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                          color: AppColors.primary,
-                        ),
-                  ),
-                ),
-              ),
               const SizedBox(height: 40),
               BlocConsumer<AuthCubit, AuthState>(
                 bloc: authCubit,
@@ -149,7 +159,7 @@ class _SignInState extends State<SignIn> {
                     );
                   }
                   return MainButton(
-                    label: "Login",
+                    label: "Sign Up",
                     onPressed: () async {
                       if (formKey.currentState!.validate()) {
                         await authCubit.signIn(
