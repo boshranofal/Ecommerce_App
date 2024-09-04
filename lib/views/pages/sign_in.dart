@@ -67,7 +67,7 @@ class _SignInState extends State<SignIn> {
                       ),
                 ),
               ),
-              const SizedBox(height: 40),
+              const SizedBox(height: 36),
               Text("Password",
                   style: Theme.of(context).textTheme.titleLarge!.copyWith(
                         fontWeight: FontWeight.bold,
@@ -121,7 +121,7 @@ class _SignInState extends State<SignIn> {
                   ),
                 ),
               ),
-              const SizedBox(height: 40),
+              const SizedBox(height: 24),
               BlocConsumer<AuthCubit, AuthState>(
                 bloc: authCubit,
                 listenWhen: (previous, current) =>
@@ -159,13 +159,100 @@ class _SignInState extends State<SignIn> {
                   );
                 },
               ),
-              const SizedBox(height: 12),
+              const SizedBox(height: 8),
               Align(
                 alignment: Alignment.center,
                 child: Text("Or using other methods",
                     style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                           color: Colors.grey,
                         )),
+              ),
+              const SizedBox(height: 8),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Row(
+                    children: [
+                      IconButton(
+                        icon: const Icon(Icons.facebook,
+                            color: AppColors.primary),
+                        onPressed: () {},
+                      ),
+                      const SizedBox(width: 12),
+                      Text('Sign in with Facebook',
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyMedium!
+                              .copyWith(fontWeight: FontWeight.bold)),
+                    ],
+                  ),
+                  const SizedBox(width: 8),
+                  Row(
+                    children: [
+                      BlocConsumer<AuthCubit, AuthState>(
+                        bloc: authCubit,
+                        listenWhen: (previous, current) =>
+                            current is GoogleSignInError ||
+                            current is GoogleSignInSuccess,
+                        listener: (context, state) {
+                          if (state is GoogleSignInSuccess) {
+                            Navigator.pushReplacementNamed(
+                                context, AppRoutes.home);
+                          } else if (state is GoogleSignInError) {
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content: Text(state.message),
+                              backgroundColor: AppColors.red,
+                            ));
+                          }
+                        },
+                        buildWhen: (previous, current) =>
+                            current is GoogleSignInLoading ||
+                            current is GoogleSignInError ||
+                            current is GoogleSignInSuccess,
+                        builder: (context, state) {
+                          if (state is GoogleSignInLoading) {
+                            return IconButton(
+                                icon: const Icon(Icons.g_mobiledata_outlined,
+                                    color: AppColors.red),
+                                onPressed: () {});
+                          }
+                          return IconButton(
+                            icon: const Icon(Icons.g_mobiledata_outlined,
+                                color: AppColors.red),
+                            onPressed: () async {
+                              await authCubit.authenticateWithGoogle();
+                            },
+                          );
+                        },
+                      ),
+                      const SizedBox(width: 12),
+                      Text('Sign in with Google',
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyMedium!
+                              .copyWith(fontWeight: FontWeight.bold)),
+                    ],
+                  ),
+                ],
+              ),
+              const SizedBox(height: 8),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text("Don't have an account?",
+                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                            color: Colors.grey,
+                          )),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, AppRoutes.signup);
+                    },
+                    child: Text("Sign Up",
+                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                              color: AppColors.primary,
+                            )),
+                  ),
+                ],
               ),
             ],
           ),
