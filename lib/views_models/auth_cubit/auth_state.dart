@@ -13,6 +13,19 @@ final class AuthError extends AuthState {
   AuthError(this.message);
 }
 
+final class SignnigUp extends AuthState {}
+
+final class SignedUp extends AuthState {}
+
 final class SiginingOut extends AuthState {}
 
 final class SiginedOut extends AuthState {}
+
+final class GoogleSignInLoading extends AuthState {}
+
+final class GoogleSignInSuccess extends AuthState {}
+
+final class GoogleSignInError extends AuthState {
+  final String message;
+  GoogleSignInError(this.message);
+}
