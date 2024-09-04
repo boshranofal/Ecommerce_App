@@ -159,6 +159,14 @@ class _SignInState extends State<SignIn> {
                   );
                 },
               ),
+              const SizedBox(height: 12),
+              Align(
+                alignment: Alignment.center,
+                child: Text("Or using other methods",
+                    style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                          color: Colors.grey,
+                        )),
+              ),
             ],
           ),
         ),

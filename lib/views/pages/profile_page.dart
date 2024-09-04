@@ -1,7 +1,6 @@
 import 'package:ecommerce_app/models/profile_models.dart';
 import 'package:ecommerce_app/utils/app_colors.dart';
 import 'package:ecommerce_app/utils/app_routes.dart';
-import 'package:ecommerce_app/views/widget/main_button.dart';
 import 'package:ecommerce_app/views_models/auth_cubit/auth_cubit.dart';
 import 'package:ecommerce_app/views_models/profile_cubit/profile_cubit.dart';
 import 'package:flutter/material.dart';
@@ -44,59 +43,6 @@ class ProfilePage extends StatelessWidget {
                       style:
                           TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
-                    ListView.builder(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemCount: 5,
-                      itemBuilder: (context, index) {
-                        return Card(
-                          child: ListTile(
-                            title: Text(
-                              dummygeneral[index].title,
-                              style: const TextStyle(fontSize: 14),
-                            ),
-                            leading: Icon(dummygeneral[index].icon),
-                            trailing: IconButton(
-                              onPressed: () {},
-                              icon: Icon(
-                                dummygeneral[index].icon2,
-                                color: AppColors.grey,
-                              ),
-                            ),
-                          ),
-                        );
-                      },
-                    ),
-                    const SizedBox(height: 8),
-                    const Text(
-                      "Preferences",
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                    ),
-                    ListView.builder(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemCount: dummyprefer.length,
-                      itemBuilder: (context, index) {
-                        return Card(
-                          child: ListTile(
-                            title: Text(
-                              dummyprefer[index].title,
-                              style: const TextStyle(fontSize: 14),
-                            ),
-                            leading: Icon(dummyprefer[index].icon),
-                            trailing: IconButton(
-                              onPressed: () {},
-                              icon: Icon(
-                                dummyprefer[index].icon2,
-                                color: AppColors.grey,
-                              ),
-                            ),
-                          ),
-                        );
-                      },
-                    ),
-                    const SizedBox(height: 8),
                     BlocConsumer<AuthCubit, AuthState>(
                       bloc: authCubit,
                       listenWhen: (previous, current) =>
@@ -117,14 +63,86 @@ class ProfilePage extends StatelessWidget {
                           current is SiginedOut ||
                           current is AuthError,
                       builder: (context, state) {
-                        if (state is SiginingOut) {
-                          return const MainButton(
-                            isLoading: true,
-                          );
+                        return ListView.builder(
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemCount: 5,
+                          itemBuilder: (context, index) {
+                            return Card(
+                              child: ListTile(
+                                title: Text(
+                                  dummygeneral[index].title,
+                                  style: const TextStyle(fontSize: 14),
+                                ),
+                                leading: IconButton(
+                                    icon: dummygeneral[index].icon.icon,
+                                    onPressed: () {}),
+                                trailing: IconButton(
+                                    icon: Icon(dummygeneral[index].icon2,
+                                        color: AppColors.grey),
+                                    onPressed: () {}),
+                              ),
+                            );
+                          },
+                        );
+                      },
+                    ),
+                    const SizedBox(height: 8),
+                    const Text(
+                      "Preferences",
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    ),
+                    BlocConsumer<AuthCubit, AuthState>(
+                      bloc: authCubit,
+                      listenWhen: (previous, current) =>
+                          current is SiginedOut || current is AuthError,
+                      listener: (context, state) {
+                        if (state is AuthSuccess) {
+                          Navigator.of(context, rootNavigator: true)
+                              .pushReplacementNamed(AppRoutes.signin);
+                        } else if (state is AuthError) {
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content: Text(state.message),
+                            backgroundColor: AppColors.red,
+                          ));
                         }
-                        return MainButton(
-                          onPressed: () async => await authCubit.signOut(),
-                          label: 'Sign Out',
+                      },
+                      buildWhen: (previous, current) =>
+                          current is SiginingOut ||
+                          current is SiginedOut ||
+                          current is AuthError,
+                      builder: (context, state) {
+                        return ListView.builder(
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemCount: dummyprefer.length,
+                          itemBuilder: (context, index) {
+                            return Card(
+                              child: ListTile(
+                                title: Text(
+                                  dummyprefer[index].title,
+                                  style: const TextStyle(fontSize: 14),
+                                ),
+                                leading: IconButton(
+                                  icon: dummyprefer[index].icon.icon,
+                                  onPressed: () {},
+                                ),
+                                trailing: IconButton(
+                                  icon: Icon(dummyprefer[index].icon2,
+                                      color: AppColors.grey),
+                                  onPressed: state is SiginingOut
+                                      ? null
+                                      : () {
+                                          if (dummyprefer[index].title ==
+                                              'Logout') {
+                                            authCubit.signOut();
+                                          }
+                                        },
+                                ),
+                              ),
+                            );
+                          },
                         );
                       },
                     ),
