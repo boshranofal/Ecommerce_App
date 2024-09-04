@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ProfileModels {
-  final IconData icon;
+  final IconButton icon;
   final String title;
   final IconData icon2 = Icons.arrow_forward_ios;
   ProfileModels({
@@ -11,17 +11,84 @@ class ProfileModels {
 }
 
 List<ProfileModels> dummygeneral = [
-  ProfileModels(icon: Icons.person_outlined, title: 'Edit Profile'),
-  ProfileModels(icon: Icons.lock_outline, title: 'Change Password'),
-  ProfileModels(icon: Icons.notifications_outlined, title: 'Notifications'),
-  ProfileModels(icon: Icons.security_outlined, title: 'Security'),
-  ProfileModels(icon: Icons.language_outlined, title: 'Lnguage'),
-  ProfileModels(icon: Icons.policy_outlined, title: 'Legal and Policy'),
-  ProfileModels(icon: Icons.help_center_outlined, title: 'Help and Support'),
-  ProfileModels(icon: Icons.logout_outlined, title: 'Logout'),
+  ProfileModels(
+    icon: IconButton(
+      icon: const Icon(Icons.person_outlined),
+      onPressed: () {},
+    ),
+    title: 'Edit Profile',
+  ),
+  ProfileModels(
+    icon: IconButton(
+      icon: const Icon(Icons.lock_outline),
+      onPressed: () {},
+    ),
+    title: 'Change Password',
+  ),
+  ProfileModels(
+    icon: IconButton(
+      icon: const Icon(Icons.notifications_outlined),
+      onPressed: () {},
+    ),
+    title: 'Notifications',
+  ),
+  ProfileModels(
+    icon: IconButton(
+      icon: const Icon(Icons.security_outlined),
+      onPressed: () {},
+    ),
+    title: 'Security',
+  ),
+  ProfileModels(
+    icon: IconButton(
+      icon: const Icon(Icons.language_outlined),
+      onPressed: () {},
+    ),
+    title: 'Language',
+  ),
+  ProfileModels(
+    icon: IconButton(
+      icon: const Icon(Icons.policy_outlined),
+      onPressed: () {},
+    ),
+    title: 'Legal and Policy',
+  ),
+  ProfileModels(
+    icon: IconButton(
+      icon: const Icon(Icons.help_center_outlined),
+      onPressed: () {},
+    ),
+    title: 'Help and Support',
+  ),
+  ProfileModels(
+    icon: IconButton(
+      icon: const Icon(Icons.logout_outlined),
+      onPressed: () {},
+    ),
+    title: 'Logout',
+  ),
 ];
+
 List<ProfileModels> dummyprefer = [
-  ProfileModels(icon: Icons.policy_outlined, title: 'Legal and Policy'),
-  ProfileModels(icon: Icons.help_center_outlined, title: 'Help and Support'),
-  ProfileModels(icon: Icons.logout_outlined, title: 'Logout'),
+  ProfileModels(
+    icon: IconButton(
+      icon: const Icon(Icons.policy_outlined),
+      onPressed: () {},
+    ),
+    title: 'Legal and Policy',
+  ),
+  ProfileModels(
+    icon: IconButton(
+      icon: const Icon(Icons.help_center_outlined),
+      onPressed: () {},
+    ),
+    title: 'Help and Support',
+  ),
+  ProfileModels(
+    icon: IconButton(
+      icon: const Icon(Icons.logout_outlined),
+      onPressed: () {},
+    ),
+    title: 'Logout',
+  ),
 ];
