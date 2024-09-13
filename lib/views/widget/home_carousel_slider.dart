@@ -23,8 +23,11 @@ class _HomeCarouselSliderState extends State<HomeCarouselSlider> {
     final List<Widget> imageSliders = widget.imgurls
         .map(
           (item) => ClipRRect(
-              borderRadius: BorderRadius.all(Radius.circular(5.0)),
-              child: Image.asset(
+              borderRadius: const BorderRadius.all(Radius.circular(5.0)),
+              child: Image.network(
+                errorBuilder: (context, error, stackTrace) {
+                  return Text('Error loading image');
+                },
                 item,
                 fit: BoxFit.cover,
                 width: 999.0,

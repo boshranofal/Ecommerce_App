@@ -4,6 +4,23 @@ class CatugoryModels {
   final String id;
 
   CatugoryModels({required this.imgUrl, required this.name, required this.id});
+
+  Map<String, dynamic> toMap() {
+    final result = Map<String, dynamic>();
+
+    result.addAll({'imgUrl': imgUrl});
+    result.addAll({'name': name});
+    result.addAll({'id': id});
+    return result;
+  }
+
+  factory CatugoryModels.fromMap(Map<String, dynamic> map, String documentId) {
+    return CatugoryModels(
+      id: documentId,
+      imgUrl: map['imgUrl'] ?? '',
+      name: map['name'] ?? '',
+    );
+  }
 }
 
 List<CatugoryModels> dummyCategories = [

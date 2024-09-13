@@ -74,11 +74,11 @@ class _SignUpState extends State<SignUp> {
               TextFormField(
                 controller: emailController,
                 validator: (value) {
-                  RegExp regex = RegExp(r'^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$');
+                  // RegExp regex = RegExp(r'^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$');
                   if (value!.isEmpty) {
                     return "Email is required";
-                  } else if (!regex.hasMatch(value)) {
-                    return "Invalid email";
+                    // } else if (!regex.hasMatch(value)) {
+                    //  return "Invalid email";
                   }
                   return null;
                 },

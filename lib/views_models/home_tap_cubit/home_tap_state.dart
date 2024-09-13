@@ -7,10 +7,10 @@ final class HomeInitial extends HomeTapState {}
 final class HomeLoading extends HomeTapState {}
 
 final class HomeLoaded extends HomeTapState {
-  final List<String> imgurls;
   final List<ProductModels> products;
+  final List<String> imgList;
 
-  HomeLoaded({required this.imgurls, required this.products});
+  HomeLoaded({required this.products, required this.imgList});
 }
 
 final class HomeError extends HomeTapState {

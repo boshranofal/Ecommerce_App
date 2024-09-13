@@ -4,6 +4,7 @@ import 'package:ecommerce_app/views/widget/counter_details_widget.dart';
 import 'package:ecommerce_app/views_models/product_datails_cubit/product_datails_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class ProductDetails extends StatelessWidget {
   const ProductDetails({super.key});
@@ -44,9 +45,9 @@ class ProductDetails extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Center(
-                      child: Image.asset(
-                        state.product.image,
-                        fit: BoxFit.cover,
+                      child: CachedNetworkImage(
+                        imageUrl: product.image,
+                        fit: BoxFit.contain,
                         height: 250,
                       ),
                     ),
@@ -275,35 +276,6 @@ class ProductDetails extends StatelessWidget {
                                         },
                                       ),
                                     ),
-                                    // ElevatedButton(
-                                    //   onPressed: () {
-                                    //     detailscubit.togglecart(state.product);
-                                    //   },
-                                    //   style: ElevatedButton.styleFrom(
-                                    //     backgroundColor: const Color.fromRGBO(81, 78, 182, 1),
-                                    //     shape: RoundedRectangleBorder(
-                                    //       borderRadius:
-                                    //           BorderRadius.circular(16),
-                                    //     ),
-                                    //   ),
-                                    //   child: Row(
-                                    //     children: [
-                                    //       const Icon(
-                                    //         Icons.shopping_bag,
-                                    //         color: Colors.white,
-                                    //       ),
-                                    //       Text(
-                                    //         'Add to Cart',
-                                    //         style: Theme.of(context)
-                                    //             .textTheme
-                                    //             .titleMedium!
-                                    //             .copyWith(
-                                    //               color: Colors.white,
-                                    //             ),
-                                    //       ),
-                                    //     ],
-                                    //   ),
-                                    // ),
                                   ],
                                 ),
                               ]),

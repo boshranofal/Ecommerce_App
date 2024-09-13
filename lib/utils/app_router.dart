@@ -13,11 +13,13 @@ class AppRouter {
     switch (settings.name) {
       case AppRoutes.productdetails:
         final productId = settings.arguments as ProductModels;
+
+        //print('Type of productId: ${productId.runtimeType}');
         return CupertinoPageRoute(
           builder: (_) => BlocProvider(
             create: (context) {
               final cubit = ProductDatailsCubit();
-              cubit.getProductDetails(productId);
+              cubit.getProductDetails(productId.id);
               return cubit;
             },
             child: const ProductDetails(),
