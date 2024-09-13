@@ -38,7 +38,7 @@ class _ProductItemState extends State<ProductItem> {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8),
-              child: Image.asset(
+              child: Image.network(
                 widget.product.image,
                 height: 97,
                 fit: BoxFit.cover,
@@ -98,12 +98,12 @@ class _ProductItemState extends State<ProductItem> {
                 fontWeight: FontWeight.w600,
               ),
         ),
-        Text(
-          widget.product.category.name,
-          style: Theme.of(context).textTheme.labelMedium!.copyWith(
-                color: AppColors.grey,
-              ),
-        ),
+        // Text(
+        //   widget.product.category.name,
+        //   style: Theme.of(context).textTheme.labelMedium!.copyWith(
+        //         color: AppColors.grey,
+        //       ),
+        // ),
         Text(
           '\$${widget.product.price}',
           style: Theme.of(context).textTheme.titleSmall!.copyWith(

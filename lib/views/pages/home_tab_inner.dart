@@ -26,8 +26,9 @@ class HomeTabInner extends StatelessWidget {
             child: CircularProgressIndicator.adaptive(),
           );
         } else if (state is HomeLoaded) {
+          final images = state.imgList;
+
           final products = state.products;
-          final imgurls = state.imgurls;
           return SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 12.0),
@@ -36,7 +37,7 @@ class HomeTabInner extends StatelessWidget {
                   SizedBox(
                     height: size.height * 0.3,
                     child: HomeCarouselSlider(
-                      imgurls: imgurls,
+                      imgurls: images,
                     ),
                   ),
                   // const SizedBox(height: 12),
@@ -92,8 +93,8 @@ class HomeTabInner extends StatelessWidget {
           );
         } else {
           if (state is HomeError) {
-            return const Center(
-              child: Text('Error'),
+            return Center(
+              child: Text(state.message),
             );
           } else {
             return const SizedBox();

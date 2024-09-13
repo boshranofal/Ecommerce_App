@@ -1,17 +1,23 @@
 import 'package:ecommerce_app/models/cart_models.dart';
 import 'package:ecommerce_app/models/product_models.dart';
+import 'package:ecommerce_app/services/product_details_services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'product_datails_state.dart';
 
 class ProductDatailsCubit extends Cubit<ProductDatailsState> {
   ProductDatailsCubit() : super(ProductDatailsInitial());
+
+  final productDetailsServices = ProductDetailsServices();
   int counter = 1;
-  void getProductDetails(ProductModels product) {
+  Future<void> getProductDetails(String id) async {
     emit(ProductDatailsLoading());
-    Future.delayed(const Duration(seconds: 1), () {
+    try {
+      final product = await productDetailsServices.getProductDetails(id);
       emit(ProductDatailsLoaded(product: product));
-    });
+    } catch (e) {
+      emit(ProductDatailsError(message: e.toString()));
+    }
   }
 
   void incrementCounter() {

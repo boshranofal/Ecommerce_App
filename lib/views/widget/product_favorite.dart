@@ -81,12 +81,12 @@ class _ProductFavoriteState extends State<ProductFavorite> {
                 fontWeight: FontWeight.w600,
               ),
         ),
-        Text(
-          widget.product.category.name,
-          style: Theme.of(context).textTheme.labelMedium!.copyWith(
-                color: AppColors.grey,
-              ),
-        ),
+        // Text(
+        //   widget.product.category.name,
+        //   style: Theme.of(context).textTheme.labelMedium!.copyWith(
+        //         color: AppColors.grey,
+        //       ),
+        // ),
         Text(
           '\$${widget.product.price}',
           style: Theme.of(context).textTheme.titleSmall!.copyWith(
