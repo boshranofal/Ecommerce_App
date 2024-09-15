@@ -26,7 +26,7 @@ class CartItemWidget extends StatelessWidget {
           children: [
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Image.asset(
+              child: Image.network(
                 cartItemWidget.productCart.image,
                 height: 100,
                 width: 100,

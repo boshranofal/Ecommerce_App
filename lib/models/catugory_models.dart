@@ -6,7 +6,7 @@ class CatugoryModels {
   CatugoryModels({required this.imgUrl, required this.name, required this.id});
 
   Map<String, dynamic> toMap() {
-    final result = Map<String, dynamic>();
+    final result = <String, dynamic>{};
 
     result.addAll({'imgUrl': imgUrl});
     result.addAll({'name': name});
@@ -25,9 +25,23 @@ class CatugoryModels {
 
 List<CatugoryModels> dummyCategories = [
   CatugoryModels(
-      imgUrl: 'assets/images/airpods.png', name: 'Electronics', id: '1'),
+      imgUrl:
+          'https://raw.githubusercontent.com/boshranofal/Ecommerce_App/refs/heads/main/assets/images/airpods.png',
+      name: 'Electronics',
+      id: '1'),
   CatugoryModels(
-      imgUrl: 'assets/images/clothess.jpg', name: 'Clothes', id: '2'),
-  CatugoryModels(imgUrl: 'assets/images/bagg.jpg', name: 'Bag', id: '3'),
-  CatugoryModels(imgUrl: 'assets/images/shoess.jpg', name: 'Shoes', id: '4'),
+      imgUrl:
+          'https://raw.githubusercontent.com/boshranofal/Ecommerce_App/refs/heads/main/assets/images/clothess.jpg',
+      name: 'Clothes',
+      id: '2'),
+  CatugoryModels(
+      imgUrl:
+          'https://raw.githubusercontent.com/boshranofal/Ecommerce_App/refs/heads/main/assets/images/bagg.jpg',
+      name: 'Bag',
+      id: '3'),
+  CatugoryModels(
+      imgUrl:
+          'https://raw.githubusercontent.com/boshranofal/Ecommerce_App/refs/heads/main/assets/images/shoess.jpg',
+      name: 'Shoes',
+      id: '4'),
 ];

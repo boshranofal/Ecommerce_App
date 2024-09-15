@@ -1,5 +1,6 @@
 import 'package:ecommerce_app/models/cart_models.dart';
 import 'package:ecommerce_app/models/product_models.dart';
+import 'package:ecommerce_app/services/auth_services.dart';
 import 'package:ecommerce_app/services/product_details_services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -7,7 +8,7 @@ part 'product_datails_state.dart';
 
 class ProductDatailsCubit extends Cubit<ProductDatailsState> {
   ProductDatailsCubit() : super(ProductDatailsInitial());
-
+  final authServices = AuthServices();
   final productDetailsServices = ProductDetailsServices();
   int counter = 1;
   Future<void> getProductDetails(String id) async {
@@ -41,16 +42,21 @@ class ProductDatailsCubit extends Cubit<ProductDatailsState> {
   Future<void> togglecart(ProductModels product) async {
     emit(SetCartAdding());
     try {
+      final currentuser = authServices.currentUser;
+      final cartProduct =
+          await productDetailsServices.getProductDetails(currentuser!.uid);
+
       final cartOrder = CartModel(
         id: DateTime.now().toIso8601String(),
-        productCart: product,
+        productCart: cartProduct,
         price: counter * product.price,
         quantity: counter,
         //size: size!,
       );
-      if (!dummyCart.contains(cartOrder)) {
-        dummyCart.add(cartOrder);
-      }
+      // if (!dummyCart.contains(cartOrder)) {
+      //   dummyCart.add(cartOrder);
+      // }
+      await productDetailsServices.addProductToCart(currentuser.uid, cartOrder);
       emit(SetCartAdded(product: product));
     } catch (e) {
       emit(SetCartError(message: e.toString()));

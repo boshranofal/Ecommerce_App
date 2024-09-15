@@ -162,7 +162,7 @@ class _SignUpState extends State<SignUp> {
                     label: "Sign Up",
                     onPressed: () async {
                       if (formKey.currentState!.validate()) {
-                        await authCubit.signIn(
+                        await authCubit.signUp(
                             emailController.text, passwordController.text);
                       }
                     },

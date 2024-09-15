@@ -4,6 +4,7 @@ import 'package:ecommerce_app/utils/api_path.dart';
 
 class HomeService {
   final fireStoreService = FirestoreServices.instance;
+
   Future<List<ProductModels>> getProducts() async {
     return await fireStoreService.getCollection<ProductModels>(
       path: ApiPath.product(),
@@ -17,14 +18,10 @@ class HomeService {
   }
 
   Future<List<String>> getImages() async {
-    // Retrieve the collection of image URLs
     final querySnapshot = await fireStoreService.getCollection(
       path: ApiPath.imgaes(),
-      builder: (data, documentId) =>
-          data['img'].toString(), // Extract the 'img' field
+      builder: (data, documentId) => data['img'].toString(),
     );
-
-    // Map each document in the snapshot to a string (the image URL)
     List<String> imageUrls =
         querySnapshot.map((doc) => doc.toString()).toList();
 

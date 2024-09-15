@@ -8,7 +8,7 @@ class CatugoryTabInner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final categortTabCubit = BlocProvider.of<HomeTapCubit>(context);
+    final categortTabCubit = context.read<HomeTapCubit>();
     return BlocBuilder<HomeTapCubit, HomeTapState>(
       bloc: categortTabCubit,
       buildWhen: (previous, current) =>
@@ -21,11 +21,12 @@ class CatugoryTabInner extends StatelessWidget {
             child: CircularProgressIndicator.adaptive(),
           );
         } else if (state is CategoryLoaded) {
+          final categories = state.categories;
           return Column(
             children: [
               Expanded(
                 child: ListView.builder(
-                  itemCount: dummyCategories.length,
+                  itemCount: categories.length,
                   itemBuilder: (context, index) {
                     return Card(
                       margin: const EdgeInsets.symmetric(
@@ -41,7 +42,7 @@ class CatugoryTabInner extends StatelessWidget {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
-                                    dummyCategories[index].name,
+                                    categories[index].name,
                                     style: const TextStyle(
                                       fontSize: 20,
                                       fontWeight: FontWeight.bold,
@@ -54,10 +55,10 @@ class CatugoryTabInner extends StatelessWidget {
                             ),
                             Padding(
                               padding: const EdgeInsets.only(left: 16.0),
-                              child: Image.asset(
-                                dummyCategories[index].imgUrl,
-                                height: 120,
-                                width: 130,
+                              child: Image.network(
+                                categories[index].imgUrl,
+                                // height: 120,
+                                // width: 130,
                                 fit: BoxFit.cover,
                               ),
                             ),

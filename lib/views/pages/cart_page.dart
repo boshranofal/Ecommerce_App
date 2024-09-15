@@ -111,10 +111,12 @@ class _CartPageState extends State<CartPage> {
               ),
             ),
           );
-        } else {
-          return const Center(
-            child: Text('Error'),
+        } else if (state is CartError) {
+          return Center(
+            child: Text(state.message),
           );
+        } else {
+          return const SizedBox();
         }
       },
     );

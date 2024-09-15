@@ -79,8 +79,10 @@ class _ProductItemState extends State<ProductItem> {
                             color: AppColors.primary,
                           );
                         }
-                        return const Icon(
-                          Icons.favorite_border,
+                        return Icon(
+                          widget.product.isFaviorite
+                              ? Icons.favorite
+                              : Icons.favorite_border,
                           size: 16,
                           color: AppColors.primary,
                         );

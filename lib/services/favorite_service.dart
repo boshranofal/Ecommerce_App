@@ -7,10 +7,11 @@ class FavoriteService {
 
   Future<void> addFavarite(String uid, ProductModels product) async =>
       await fireStoreService.setData(
-          path: ApiPath.favorite(uid, product.id), data: product.toMap());
+          path: ApiPath.favoriteItem(uid, product.id), data: product.toMap());
 
   Future<void> removeFavorite(String uid, String productId) async =>
-      await fireStoreService.deleteData(path: ApiPath.favorite(uid, productId));
+      await fireStoreService.deleteData(
+          path: ApiPath.favoriteItem(uid, productId));
 
   Future<List<ProductModels>> getFavorite(String uid) async =>
       await fireStoreService.getCollection(

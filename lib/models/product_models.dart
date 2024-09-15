@@ -12,6 +12,7 @@ class ProductModels {
   final String details =
       'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry';
   //int quantity = 1;
+  final bool isFaviorite;
   int selectecolor = 0;
 
   ProductModels({
@@ -20,6 +21,7 @@ class ProductModels {
     required this.image,
     required this.price,
     required this.id,
+    this.isFaviorite = false,
     //required this.category,
   });
   void selectColor(int index) {
@@ -33,6 +35,7 @@ class ProductModels {
     double? price,
     String? id,
     CatugoryModels? category,
+    bool? isFaviorite,
   }) {
     return ProductModels(
       name: name ?? this.name,
@@ -40,12 +43,13 @@ class ProductModels {
       image: image ?? this.image,
       price: price ?? this.price,
       id: id ?? this.id,
+      isFaviorite: isFaviorite ?? this.isFaviorite,
       //category: category ?? this.category,
     );
   }
 
   Map<String, dynamic> toMap() {
-    final result = Map<String, dynamic>();
+    final result = <String, dynamic>{};
 
     result.addAll({'name': name});
     result.addAll({'description': description});
