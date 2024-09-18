@@ -16,4 +16,11 @@ class ApiPath {
 
   static String category() => 'category/';
   static String categoryItem(String categoryId) => 'category/$categoryId';
+
+  static String details(String userId) => 'users/$userId/details/';
+  static String detailItem(String userId, String detailId) =>
+      'users/$userId/details/$detailId';
+
+  static String addresses(String uid) => 'users/$uid/addresses/';
+  static String paymentMethods(String uid) => 'users/$uid/paymentMethods/';
 }

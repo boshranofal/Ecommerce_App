@@ -14,5 +14,7 @@ class ProductDetailsServices {
 
   Future<void> addProductToCart(String userId, CartModel cartItem) async =>
       await fireStoreService.setData(
-          path: ApiPath.cartItem(userId, cartItem.id), data: cartItem.toMap());
+        path: ApiPath.cartItem(userId, cartItem.id),
+        data: cartItem.toMap(),
+      );
 }

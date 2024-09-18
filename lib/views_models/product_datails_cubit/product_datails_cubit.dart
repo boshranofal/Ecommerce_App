@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:ecommerce_app/models/cart_models.dart';
 import 'package:ecommerce_app/models/product_models.dart';
 import 'package:ecommerce_app/services/auth_services.dart';
@@ -43,22 +45,22 @@ class ProductDatailsCubit extends Cubit<ProductDatailsState> {
     emit(SetCartAdding());
     try {
       final currentuser = authServices.currentUser;
-      final cartProduct =
-          await productDetailsServices.getProductDetails(currentuser!.uid);
+      // final cartProduct =
+      //     await productDetailsServices.getProductDetails(currentuser!.uid);
 
       final cartOrder = CartModel(
         id: DateTime.now().toIso8601String(),
-        productCart: cartProduct,
+        productCart: product,
         price: counter * product.price,
         quantity: counter,
-        //size: size!,
       );
-      // if (!dummyCart.contains(cartOrder)) {
-      //   dummyCart.add(cartOrder);
-      // }
-      await productDetailsServices.addProductToCart(currentuser.uid, cartOrder);
+      await productDetailsServices.addProductToCart(
+        currentuser!.uid,
+        cartOrder,
+      );
       emit(SetCartAdded(product: product));
     } catch (e) {
+      log(e.toString());
       emit(SetCartError(message: e.toString()));
     }
   }

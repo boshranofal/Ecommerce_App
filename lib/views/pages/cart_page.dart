@@ -85,7 +85,9 @@ class _CartPageState extends State<CartPage> {
                           const SizedBox(height: 20.0),
                           Center(
                             child: ElevatedButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.of(context).pushNamed('/checkout');
+                              },
                               style: ElevatedButton.styleFrom(
                                 padding: const EdgeInsets.symmetric(
                                   vertical: 16.0,

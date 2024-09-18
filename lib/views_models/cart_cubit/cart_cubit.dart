@@ -31,31 +31,31 @@ class CartCubit extends Cubit<CartState> {
     }
   }
 
-  void incrementCounter(int previousValue, String cartItemId) {
+  Future<void> incrementCounter(
+      int previousValue, String cartItemId, String userId) async {
     emit(QuantityChanging(cartItemId));
-    Future.delayed(const Duration(), () {
-      var newValue = ++previousValue;
-      emit(QuantityChanged(newValue, cartItemId));
-    });
+    var newValue = ++previousValue;
+
+    await cartService.setCounter(userId, cartItemId, newValue);
+
+    emit(QuantityChanged(newValue, cartItemId));
   }
 
-  void decrementCounter(int previousValue, String cartItemId) {
+  Future<void> decrementCounter(
+      int previousValue, String cartItemId, String userId) async {
     emit(QuantityChanging(cartItemId));
-    Future.delayed(const Duration(), () {
-      var newValue = previousValue;
-      if (previousValue > 1) {
-        newValue = --newValue;
-      }
-      emit(QuantityChanged(newValue, cartItemId));
-    });
+    var newValue = --previousValue;
+
+    await cartService.setCounter(userId, cartItemId, newValue);
+
+    emit(QuantityChanged(newValue, cartItemId));
   }
 
   Future<void> remove(CartModel product) async {
     emit(Removing());
-    Future.delayed(const Duration(milliseconds: 100), () {
-      dummyCart.remove(product);
-      emit(Removed(cart: dummyCart));
-    });
+    final currentUser = authservice.currentUser;
+    await cartService.removeCart(currentUser!.uid, product.id);
+    emit(Removed());
     // }
   }
 }

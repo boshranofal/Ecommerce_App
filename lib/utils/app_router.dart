@@ -1,9 +1,11 @@
 import 'package:ecommerce_app/models/product_models.dart';
 import 'package:ecommerce_app/utils/app_routes.dart';
+import 'package:ecommerce_app/views/pages/check_out_page.dart';
 import 'package:ecommerce_app/views/pages/product_details.dart';
 import 'package:ecommerce_app/views/pages/sign_in.dart';
 import 'package:ecommerce_app/views/pages/sign_up.dart';
 import 'package:ecommerce_app/views/widget/custom_bottom_navbar.dart';
+import 'package:ecommerce_app/views_models/cubit/check_out_cubit.dart';
 import 'package:ecommerce_app/views_models/product_datails_cubit/product_datails_cubit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -29,6 +31,16 @@ class AppRouter {
         return CupertinoPageRoute(builder: (_) => const SignUp());
       case AppRoutes.home:
         return CupertinoPageRoute(builder: (_) => const CustomBottomNavbar());
+      case AppRoutes.checkout:
+        return CupertinoPageRoute(
+            builder: (_) => BlocProvider(
+                  create: (context) {
+                    final cubit = CheckOutCubit();
+                    cubit.getCheckOutDetails();
+                    return cubit;
+                  },
+                  child: const CheckOutPage(),
+                ));
       case AppRoutes.signin:
       default:
         return CupertinoPageRoute(builder: (_) => const SignIn());

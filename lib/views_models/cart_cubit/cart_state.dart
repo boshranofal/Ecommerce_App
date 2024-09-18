@@ -28,8 +28,8 @@ final class CartError extends CartState {
 final class Removing extends CartState {}
 
 final class Removed extends CartState {
-  final List<CartModel> cart;
-  Removed({required this.cart});
+  // final List<CartModel> cart;
+  // Removed({required this.cart});
 }
 
 final class QuantityChanging extends CartState {

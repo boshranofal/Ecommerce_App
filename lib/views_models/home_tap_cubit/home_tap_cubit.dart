@@ -47,6 +47,7 @@ class HomeTapCubit extends Cubit<HomeTapState> {
     emit(CategoryLoading());
     try {
       final category = await categoryService.getCategories();
+
       emit(CategoryLoaded(categories: category));
     } catch (e) {
       emit(CategoryError(message: e.toString()));
