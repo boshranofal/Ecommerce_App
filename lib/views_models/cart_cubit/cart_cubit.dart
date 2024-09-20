@@ -51,11 +51,14 @@ class CartCubit extends Cubit<CartState> {
     emit(QuantityChanged(newValue, cartItemId));
   }
 
-  Future<void> remove(CartModel product) async {
-    emit(Removing());
+  Future<void> remove(
+    CartModel product,
+  ) async {
+    emit(Removing(cartId: product.id));
+
     final currentUser = authservice.currentUser;
     await cartService.removeCart(currentUser!.uid, product.id);
-    emit(Removed());
+    emit(Removed(cartId: product.id));
     // }
   }
 }

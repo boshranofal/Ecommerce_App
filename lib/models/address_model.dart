@@ -7,10 +7,11 @@ class AddressModel {
 
   const AddressModel({
     required this.id,
-    required this.imgUrl,
+    this.imgUrl =
+        'https://previews.123rf.com/images/emojoez/emojoez1903/emojoez190300018/119684277-illustrations-design-concept-location-maps-with-road-follow-route-for-destination-drive-by-gps.jpg',
     required this.name,
     required this.address,
-    required this.isFav,
+    this.isFav = false,
   });
 
   Map<String, dynamic> toMap() {
@@ -31,7 +32,25 @@ class AddressModel {
       imgUrl: map['imgUrl'] ?? '',
       name: map['name'] ?? '',
       address: map['address'] ?? '',
-      isFav: map['isFav'] ?? '',
+      isFav: map['isFav'] ?? false,
     );
   }
 }
+
+List<AddressModel> dummyLocations = const [
+  AddressModel(
+    id: '1',
+    name: 'Cairo',
+    address: 'Egypt',
+  ),
+  AddressModel(
+    id: '2',
+    name: 'Giza',
+    address: 'Egypt',
+  ),
+  AddressModel(
+    id: '3',
+    name: 'Alexandria',
+    address: 'Egypt',
+  ),
+];

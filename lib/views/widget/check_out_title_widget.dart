@@ -1,18 +1,17 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:ecommerce_app/utils/app_colors.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class CheckOutTitleWidget extends StatefulWidget {
   final String title;
   final int? numOfItems;
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
 
   const CheckOutTitleWidget({
     Key? key,
     required this.title,
     this.numOfItems,
-    required this.onTap,
+    this.onTap,
   }) : super(key: key);
 
   @override
@@ -33,24 +32,26 @@ class _CheckOutTitleWidgetState extends State<CheckOutTitleWidget> {
               fontWeight: FontWeight.bold,
             ),
           ),
+          const SizedBox(width: 4),
           if (widget.numOfItems != null)
             Text(
-              '${widget.numOfItems} items',
+              '(${widget.numOfItems})',
               style: const TextStyle(
                 fontSize: 16,
                 color: AppColors.grey,
               ),
             ),
         ]),
-        TextButton(
-          onPressed: widget.onTap,
-          child: const Text(
-            'Edit',
-            style: TextStyle(
-              color: AppColors.primary,
+        if (widget.onTap != null)
+          TextButton(
+            onPressed: widget.onTap,
+            child: const Text(
+              'Edit',
+              style: TextStyle(
+                color: AppColors.primary,
+              ),
             ),
           ),
-        ),
       ],
     );
   }

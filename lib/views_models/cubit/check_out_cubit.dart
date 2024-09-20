@@ -10,34 +10,36 @@ part 'check_out_state.dart';
 class CheckOutCubit extends Cubit<CheckOutState> {
   CheckOutCubit() : super(CheckOutInitial());
 
-  final authservice = AuthServices();
-  final checkoutServices = CheckoutServicesImpl();
+  final authServices = AuthServices();
+  final checkoutServices = CheckOutServices();
 
-  Future<void> getCheckOutDetails() async {
+  Future<void> getCheckoutData() async {
     emit(CheckOutLoading());
     try {
-      final currentUser = await authservice.currentUser;
-      final cartItems = await checkoutServices.getCartItems(currentUser!.uid);
-      final preferredLocation = (await checkoutServices.getAddresses(
-        currentUser.uid,
-        fetchPreferred: true,
-      ))
-          .first;
-      final preferredPaymentMethod = (await checkoutServices.getPaymentMethods(
-        currentUser.uid,
-        fetchPreferred: true,
-      ))
-          .first;
-      final subtotal = cartItems.fold<double>(
-          0,
-          (sum, cartItem) =>
-              sum + (cartItem.productCart.price * cartItem.quantity));
+      final currentUser = authServices.currentUser;
+      final shippingAddresses =
+          await checkoutServices.getShippingAddresses(currentUser!.uid, true);
+      final chosenShippingAddress =
+          shippingAddresses.isNotEmpty ? shippingAddresses.first : null;
+
+      final cartOrders = await checkoutServices.getCartItems(currentUser.uid);
+      final totalAmount = cartOrders.fold<double>(
+              0,
+              (previousValue, element) =>
+                  previousValue +
+                  (element.productCart.price * element.quantity)) +
+          10;
+
+      final paymentMethods =
+          await checkoutServices.getPaymentMethods(currentUser.uid, true);
+      final chosenPaymentMethod =
+          paymentMethods.isNotEmpty ? paymentMethods.first : null;
       emit(
         CheckOutLoaded(
-          cart: cartItems,
-          preferredLocation: preferredLocation,
-          preferredPaymentMethod: preferredPaymentMethod,
-          total: subtotal + 10,
+          preferredPaymentMethod: chosenPaymentMethod,
+          preferredLocation: chosenShippingAddress,
+          cart: cartOrders,
+          total: totalAmount,
         ),
       );
     } catch (e) {

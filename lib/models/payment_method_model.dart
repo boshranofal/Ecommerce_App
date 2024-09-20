@@ -17,7 +17,7 @@ class PaymentMethodModel {
     required this.expiryDate,
     required this.cvv,
     required this.cardHolderName,
-    required this.isFav,
+    this.isFav = false,
   });
 
   Map<String, dynamic> toMap() {
@@ -48,3 +48,41 @@ class PaymentMethodModel {
     );
   }
 }
+
+List<PaymentMethodModel> dummyPaymentCards = const [
+  PaymentMethodModel(
+    id: '1',
+    cardNumber: '1234 5678 9012 3456',
+    cardHolderName: 'Tarek Selmi',
+    expiryDate: '12/23',
+    cvv: '123',
+  ),
+  PaymentMethodModel(
+    id: '2',
+    cardNumber: '1234 5678 9012 3466',
+    cardHolderName: 'John Doe',
+    expiryDate: '12/23',
+    cvv: '123',
+  ),
+  PaymentMethodModel(
+    id: '3',
+    cardNumber: '1234 5678 9012 3477',
+    cardHolderName: 'Tim Smith',
+    expiryDate: '12/23',
+    cvv: '123',
+  ),
+  PaymentMethodModel(
+    id: '4',
+    cardNumber: '1234 5678 9012 3488',
+    cardHolderName: 'John Doe',
+    expiryDate: '12/23',
+    cvv: '123',
+  ),
+  PaymentMethodModel(
+    id: '5',
+    cardNumber: '1234 5678 9012 3499',
+    cardHolderName: 'Tim Smith',
+    expiryDate: '12/23',
+    cvv: '123',
+  ),
+];

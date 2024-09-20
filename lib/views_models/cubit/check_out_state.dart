@@ -8,8 +8,8 @@ final class CheckOutLoading extends CheckOutState {}
 
 final class CheckOutLoaded extends CheckOutState {
   final List<CartModel> cart;
-  final AddressModel preferredLocation;
-  final PaymentMethodModel preferredPaymentMethod;
+  final AddressModel? preferredLocation;
+  final PaymentMethodModel? preferredPaymentMethod;
   final double total;
 
   CheckOutLoaded({

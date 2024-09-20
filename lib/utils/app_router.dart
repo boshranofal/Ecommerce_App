@@ -1,5 +1,6 @@
 import 'package:ecommerce_app/models/product_models.dart';
 import 'package:ecommerce_app/utils/app_routes.dart';
+import 'package:ecommerce_app/views/pages/address_page.dart';
 import 'package:ecommerce_app/views/pages/check_out_page.dart';
 import 'package:ecommerce_app/views/pages/product_details.dart';
 import 'package:ecommerce_app/views/pages/sign_in.dart';
@@ -36,11 +37,16 @@ class AppRouter {
             builder: (_) => BlocProvider(
                   create: (context) {
                     final cubit = CheckOutCubit();
-                    cubit.getCheckOutDetails();
+                    cubit.getCheckoutData();
                     return cubit;
                   },
                   child: const CheckOutPage(),
                 ));
+      case AppRoutes.address:
+        return CupertinoPageRoute(builder: (_) => const AddressPage());
+
+      case AppRoutes.productdetails:
+        return CupertinoPageRoute(builder: (_) => const ProductDetails());
       case AppRoutes.signin:
       default:
         return CupertinoPageRoute(builder: (_) => const SignIn());

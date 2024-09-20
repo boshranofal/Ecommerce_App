@@ -4,41 +4,32 @@ import 'package:ecommerce_app/models/payment_method_model.dart';
 import 'package:ecommerce_app/services/firestore_services.dart';
 import 'package:ecommerce_app/utils/api_path.dart';
 
-abstract class CheckoutServices {
-  Future<List<CartModel>> getCartItems(String uid);
-  Future<List<AddressModel>> getAddresses(String uid,
-      {bool fetchPreferred = false});
-  Future<List<PaymentMethodModel>> getPaymentMethods(String uid,
-      {bool fetchPreferred = false});
-}
+class CheckOutServices {
+  final firestoreServices = FirestoreServices.instance;
 
-class CheckoutServicesImpl implements CheckoutServices {
-  final firestoreService = FirestoreServices.instance;
-
-  @override
-  Future<List<CartModel>> getCartItems(String uid) async =>
-      await firestoreService.getCollection<CartModel>(
-          path: ApiPath.cart(uid),
-          builder: (data, documentId) => CartModel.fromMap(data));
-  @override
-  Future<List<AddressModel>> getAddresses(String uid,
-          {bool fetchPreferred = false}) async =>
-      await firestoreService.getCollection<AddressModel>(
-        path: ApiPath.addresses(uid),
+  Future<List<AddressModel>> getShippingAddresses(String userId,
+          [bool chosenAddress = false]) async =>
+      await firestoreServices.getCollection(
+        path: ApiPath.addresses(userId),
         builder: (data, documentId) => AddressModel.fromMap(data),
-        queryBuilder: fetchPreferred
-            ? (query) => query.where('isFav', isEqualTo: true)
+        queryBuilder: chosenAddress == true
+            ? (query) => query.where('isChosen', isEqualTo: true)
             : null,
       );
 
-  @override
-  Future<List<PaymentMethodModel>> getPaymentMethods(String uid,
-          {bool fetchPreferred = false}) async =>
-      await firestoreService.getCollection<PaymentMethodModel>(
-        path: ApiPath.paymentMethods(uid),
+  Future<List<CartModel>> getCartItems(String userId) async =>
+      await firestoreServices.getCollection(
+        path: ApiPath.cart(userId),
+        builder: (data, documentId) => CartModel.fromMap(data),
+      );
+
+  Future<List<PaymentMethodModel>> getPaymentMethods(String userId,
+          [bool chosenPayment = false]) async =>
+      await firestoreServices.getCollection(
+        path: ApiPath.paymentMethods(userId),
         builder: (data, documentId) => PaymentMethodModel.fromMap(data),
-        queryBuilder: fetchPreferred
-            ? (query) => query.where('isFav', isEqualTo: true)
+        queryBuilder: chosenPayment == true
+            ? (query) => query.where('isChosen', isEqualTo: true)
             : null,
       );
 }

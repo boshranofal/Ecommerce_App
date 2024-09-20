@@ -88,7 +88,9 @@ class CartItemWidget extends StatelessWidget {
                 BlocBuilder<CartCubit, CartState>(
                   bloc: cartCubit,
                   buildWhen: (previous, current) =>
-                      current is Removing || current is Removed,
+                      current is Removing &&
+                          current.cartId == cartItemWidget.id ||
+                      current is Removed && current.cartId == cartItemWidget.id,
                   builder: (context, state) {
                     if (state is Removing) {
                       return IconButton(
