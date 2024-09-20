@@ -1,5 +1,6 @@
 import 'package:ecommerce_app/utils/app_colors.dart';
 import 'package:ecommerce_app/utils/app_routes.dart';
+
 import 'package:ecommerce_app/views/widget/check_out_cart_item_widget.dart';
 import 'package:ecommerce_app/views/widget/check_out_title_widget.dart';
 import 'package:ecommerce_app/views/widget/location_item_widget.dart';
@@ -63,8 +64,10 @@ class _CheckOutPageState extends State<CheckOutPage> {
                                 AppRoutes.address,
                               ),
                     ),
-                    if (shippingAddress != null)
-                      LocationItemWidget(location: shippingAddress),
+                    if (shippingAddress == null) const SizedBox(height: 16),
+                    LocationItemWidget(
+                      location: shippingAddress,
+                    ),
                     const SizedBox(height: 24),
                     CheckOutTitleWidget(
                       title: 'Products',
@@ -80,15 +83,11 @@ class _CheckOutPageState extends State<CheckOutPage> {
                         return CheckOutCartItemWidget(cartItem: cartOrder);
                       },
                     ),
-                    CheckOutTitleWidget(
+                    const CheckOutTitleWidget(
                       title: 'Payment Method',
-                      onTap: paymentMethod == null
-                          ? null
-                          : () => Navigator.of(context, rootNavigator: true)
-                              .pushNamed(AppRoutes.productdetails),
                     ),
                     const SizedBox(height: 16),
-                    if (paymentMethod != null)
+                    if (paymentMethod == null)
                       PaymentMethodItemWidget(
                         paymentMethod: paymentMethod,
                       ),

@@ -25,3 +25,18 @@ final class CheckOutError extends CheckOutState {
 
   CheckOutError({required this.message});
 }
+
+final class PaymentLoading extends CheckOutState {}
+
+final class PaymentLoaded extends CheckOutState {
+  final List<CartModel> cart;
+  final double total;
+
+  PaymentLoaded({required this.cart, required this.total});
+}
+
+final class PaymentError extends CheckOutState {
+  final String message;
+
+  PaymentError({required this.message});
+}

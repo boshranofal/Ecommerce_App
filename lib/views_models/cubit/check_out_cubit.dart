@@ -46,4 +46,23 @@ class CheckOutCubit extends Cubit<CheckOutState> {
       emit(CheckOutError(message: e.toString()));
     }
   }
+
+  void getpaymentMethods() async {
+    emit(PaymentLoading());
+    try {
+      final currentUser = authServices.currentUser;
+
+      final cartOrders = await checkoutServices.getCartItems(currentUser!.uid);
+      final totalAmount = cartOrders.fold<double>(
+              0,
+              (previousValue, element) =>
+                  previousValue +
+                  (element.productCart.price * element.quantity)) +
+          10;
+
+      emit(PaymentLoaded(cart: cartOrders, total: totalAmount));
+    } catch (e) {
+      emit(PaymentError(message: e.toString()));
+    }
+  }
 }
