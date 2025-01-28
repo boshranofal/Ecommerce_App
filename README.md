@@ -1,16 +1,12 @@
-# ecommerce_app
+# E-Commerce App with Flutter
 
-A new Flutter project.
+This repository contains the source code for a Flutter-based e-commerce app designed for Android. The app offers a complete shopping experience with features like product browsing, user account management, a shopping cart, and order processing. It is built with a clean UI and smooth performance to ensure an intuitive and seamless user experience.
 
-## Getting Started
+## Key Features:
+- Product browsing, user account management, and order processing.
+- Full support for Android only.
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Technologies Used:
+- **Flutter**: For developing the user interface.
+- **State Management**: Using Provider or BLoC, depending on the setup.
+- **Backend**: Firebase or a custom API for data handling.
